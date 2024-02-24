@@ -6,7 +6,6 @@ require('dotenv').config({ path: '../config/config.env' });
 
 
 const mongoose = require('mongoose');
-const cron = require('node-cron');
 const usgsRoutes = require('./routes/usgs');
 const weatherRoutes = require('./routes/weatherRoutes');
 const auth = require('./routes/auth')
