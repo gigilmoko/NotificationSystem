@@ -122,7 +122,7 @@ function checkHeatIndex(heatIndex) {
 }
 
 const startCronJobsWeather = () => {
-    cron.schedule('* * * * *', async () => {
+    cron.schedule('*/5 * * * *', async () => {
         const weatherCityName = 'Taguig';
         const weatherApiKey = 'd6536e139981446b8a734cd33ee9b21e';
         await fetchAndSaveWeatherData(weatherCityName, weatherApiKey);
