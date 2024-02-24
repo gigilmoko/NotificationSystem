@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import '../../assets/css/owl.carousel.min.css'
 import '../../assets/css/bootstrap2.min.css'
 import '../../assets/css/dashboardstyle.css'
@@ -6,8 +6,32 @@ import '../../assets/css/dashboardstyle.css'
 import Helmeth from '../Layout/adminhelmet.js'
 import Sidebar from '../Layout/adminsidebar.js'
 import HeaderNavbar from '../Layout/adminheader.js'
+import Chart1 from '../Charts/Chart1.js';
+import Chart2 from '../Charts/Chart2.js';
+import Chart3 from '../Charts/Chart3.js';
+import Chart4 from '../Charts/Chart4.js';
+import Chart5 from '../Charts/Chart5.js';
+
 const Dashboard = () => {
- 
+  const [selectedDay, setSelectedDay] = useState(1);
+
+  const renderChartForSelectedDay = () => {
+    switch (selectedDay) {
+      case 1:
+        return <Chart1 />;
+      case 2:
+        return <Chart2 />;
+      case 3:
+        return <Chart3 />;
+      case 4:
+        return <Chart4 />;
+      case 5:
+        return <Chart5 />;
+      default:
+        return null;
+    }
+  };
+  
   return (
     
     <div class = "custom-container">
@@ -34,7 +58,6 @@ const Dashboard = () => {
                 <i className="fa fa-chart-line fa-3x text-primary" />
                 <div className="ms-3">
                   <p className="mb-2">Today Sale</p>
-                  <h6 className="mb-0">$1234</h6>
                 </div>
               </div>
             </div>
@@ -71,13 +94,19 @@ const Dashboard = () => {
         {/* Sales Chart Start */}
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
-            <div className="col-sm-12 col-xl-6">
+            <div className="col-m-12 col-xl-6">
               <div className="bg-secondary text-center rounded p-4">
                 <div className="d-flex align-items-center justify-content-between mb-4">
-                  <h6 className="mb-0">Worldwide Sales</h6>
-                  <a href="">Show All</a>
+                  <h6 className="mb-0">Daily Forecasts</h6>
                 </div>
-                <canvas id="worldwide-sales" />
+                <div className="d-flex justify-content-between mb-4">
+                  {[1, 2, 3, 4, 5].map((day) => (
+                    <button key={day} onClick={() => setSelectedDay(day)} className={`btn ${selectedDay === day ? 'btn-warning' : 'btn-secondary'}`}>
+                      {`Day ${day}`}
+                    </button>
+                  ))}
+                </div>
+                {renderChartForSelectedDay()}
               </div>
             </div>
             <div className="col-sm-12 col-xl-6">
@@ -357,7 +386,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-       
         <br/>
     
       </div>
