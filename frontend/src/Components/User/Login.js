@@ -63,7 +63,7 @@ export default function Login() {
                                     <div className="login_part_text_iner">
                                         <h2>New to our Site?</h2>
                                         <p>This site provides real-time updated about Earthquake for the Country and Weather for Taguig</p>
-                                        <a href="#" className="btn_3">Create an Account</a>
+                                        <a href="/register" className="btn_3">Create an Account</a>
                                     </div>
                                 </div>
                             </div>
