@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EarthquakeSite from './Components/Earthquake/earthquake';
 import WeatherSite from './Components/Weather/weather';
+import ProtectedRoute from "./Components/Route/ProtectedRoute";
 import Login from './Components/User/Login';
 import Register from './Components/User/Register';
 import NewHome from './Components/Home/newhome';
@@ -21,15 +22,43 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/adminEarthquake" element={<AdminEarthquake />} />
-          <Route path="/dashboard/adminWeather" element={<AdminWeather />} />
-          <Route path="/adminChart" element={<Chart />} />
-          <Route path="/adminChart1" element={<Chart1 />} />
-          <Route path="/adminChart2" element={<Chart2 />} />
-          <Route path="/adminChart3" element={<Chart3 />} />
-          <Route path="/adminChart4" element={<Chart4 />} />
-          <Route path="/adminChart5" element={<Chart5 />} />
+          <Route path="admin/dashboard"  element={
+              <ProtectedRoute isAdmin={true}>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+          <Route path="admin/dashboard/adminEarthquake" element={
+              <ProtectedRoute isAdmin={true}>
+                <AdminEarthquake />
+              </ProtectedRoute>} />
+          <Route path="admin/dashboard/adminWeather" element={
+              <ProtectedRoute isAdmin={true}>
+                <AdminWeather />
+              </ProtectedRoute>} />
+          <Route path="admin/adminChart" element={
+              <ProtectedRoute isAdmin={true}>
+                <Chart />
+              </ProtectedRoute>} />
+          <Route path="admin/adminChart1" element={
+              <ProtectedRoute isAdmin={true}>
+                <Chart1 />
+              </ProtectedRoute>} />
+          <Route path="admin/adminChart2" element={
+              <ProtectedRoute isAdmin={true}>
+                <Chart2 />
+              </ProtectedRoute>} />
+          <Route path="admin/adminChart3" element={
+              <ProtectedRoute isAdmin={true}>
+                <Chart3 />
+              </ProtectedRoute>} />
+          <Route path="admin/adminChart4" element={
+              <ProtectedRoute isAdmin={true}>
+                <Chart4 />
+              </ProtectedRoute>} />
+          <Route path="admin/adminChart5" element={
+              <ProtectedRoute isAdmin={true}>
+                <Chart5 />
+              </ProtectedRoute>} />
 
           <Route path="/earthquake" element={<EarthquakeSite />} />
           <Route path="/weather" element={<WeatherSite />} />
