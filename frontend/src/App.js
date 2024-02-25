@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EarthquakeSite from './Components/Earthquake/earthquake';
 import WeatherSite from './Components/Weather/weather';
-import ProtectedRoute from "./Components/Route/ProtectedRoute";
+import ProtectedRoute from './Components/Route/ProtectedRoute';
 import Login from './Components/User/Login';
 import Register from './Components/User/Register';
 import NewHome from './Components/Home/newhome';
