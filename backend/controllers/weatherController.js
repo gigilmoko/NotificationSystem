@@ -1,5 +1,6 @@
 const axios = require('axios');
 const WeatherData = require('../models/weather');
+const HeatIndex = require('../models/heat').HeatIndex;
 const cron = require('node-cron');
 
 async function fetchAndSaveWeatherData(cityName, apiKey) {
@@ -26,8 +27,8 @@ async function fetchAndSaveWeatherData(cityName, apiKey) {
         console.log('Tropical Cyclone Signal Category:', cycloneSignalCategory);
 
         // Check conditions for heat index
-        const heatIndexCategory = checkHeatIndex(heatIndex);
-        console.log('Heat Index Category:', heatIndexCategory);
+        // const heatIndexCategory = checkHeatIndex(heatIndex);
+        // console.log('Heat Index Category:', heatIndexCategory);
 
         const newWeatherData = new WeatherData({
             city: weatherData.name,
@@ -100,7 +101,53 @@ function checkTropicalCycloneSignal(weatherData) {
     }
 }
 
-function checkHeatIndex(heatIndex) {
+const getWeather = async (req, res, next) => {
+    try {
+        const weathers = await WeatherData.find();
+        if (!weathers) {
+            return res.status(404).json({
+                success: false,
+                message: 'Earthquake not found'
+            });
+        }
+        res.status(200).json({
+            success: true,
+            weathers
+        });
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal server error'
+        });
+    }
+};
+
+const saveHeatIndex = async (weatherCityName, weatherApiKey) => {
+    try {
+        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${weatherCityName}&appid=${weatherApiKey}`);
+        const weatherData = response.data;
+
+        const temperatureCelsius = (weatherData.main.temp - 273.15).toFixed(2);
+        const humidity = weatherData.main.humidity.toFixed(2);
+        const heatIndexValue = calculateHeatIndex(parseFloat(temperatureCelsius), parseFloat(humidity));
+        const heatIndexCategory = checkHeatIndexCategory(heatIndexValue);
+
+        const newHeatIndex = new HeatIndex({
+            heatIndex: heatIndexValue.toFixed(2),
+            category: heatIndexCategory,
+        });
+        await newHeatIndex.save();
+
+        console.log('Heat Index saved:', newHeatIndex);
+
+    } catch (error) {
+        console.error('Error saving heat index:', error.message);
+        throw new Error('Error saving heat index');
+    }
+};
+
+function checkHeatIndexCategory(heatIndex) {
     const heatIndexNumber = parseFloat(heatIndex);
 
     if (!isNaN(heatIndexNumber)) {
@@ -125,32 +172,163 @@ const startCronJobsWeather = () => {
     cron.schedule('*/5 * * * *', async () => {
         const weatherCityName = 'Taguig';
         const weatherApiKey = 'd6536e139981446b8a734cd33ee9b21e';
+        
+        // Call the function to save the heat index
+        await saveHeatIndex(weatherCityName, weatherApiKey);
+
         await fetchAndSaveWeatherData(weatherCityName, weatherApiKey);
     });
 };
 
-const getWeather = async (req, res, next) => {
+
+const getWeeklyAverageHeatIndex = async (req, res, next) => {
     try {
-        const weathers = await WeatherData.find();
-        if (!weathers) {
-            return res.status(404).json({
-                success: false,
-                message: 'Earthquake not found'
-            });
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+        const weeklyAverageData = await HeatIndex.aggregate([
+            {
+                $match: {
+                    timestamp: { $gte: sevenDaysAgo },
+                },
+            },
+            {
+                $group: {
+                    _id: {
+                        date: {
+                            $dateToString: {
+                                format: '%Y-%m-%d',
+                                date: '$timestamp',
+                                timezone: 'Asia/Manila',
+                            },
+                        },
+                        category: '$category',
+                    },
+                    averageHeatIndex: { $avg: '$heatIndex' },
+                },
+            },
+            {
+                $sort: { '_id.date': 1 },
+            },
+        ]);
+
+        const uniqueCategories = [...new Set(weeklyAverageData.map(entry => entry._id.category))];
+
+        const labels = [];
+        const data = [];
+        const categories = [];
+
+        const currentDate = new Date();
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(currentDate);
+            date.setDate(date.getDate() - i);
+            const formattedDate = date.toISOString().split('T')[0];
+
+            const matchingDataPoints = weeklyAverageData.filter((entry) => entry._id.date === formattedDate);
+
+            labels.push(formattedDate);
+
+            if (matchingDataPoints.length > 0) {
+                const averageHeatIndex = matchingDataPoints.map(point => point.averageHeatIndex);
+                data.push(averageHeatIndex);
+
+                const dateCategories = matchingDataPoints.map(point => checkHeatIndexCategory(point.averageHeatIndex));
+                categories.push(dateCategories);
+            } else {
+                data.push(0);
+                categories.push([]);
+            }
         }
+
         res.status(200).json({
             success: true,
-            weathers
+            data: {
+                labels,
+                data,
+                categories,
+            },
         });
     } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.error('Error fetching weekly average heat index:', error);
         res.status(500).json({
             success: false,
-            message: 'Internal server error'
+            message: 'Internal server error',
+        });
+    }
+};
+
+const getHourlyAverageHeatIndex = async (req, res, next) => {
+    try {
+        const twentyFourHoursAgo = new Date();
+        twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+
+        const hourlyAverageData = await HeatIndex.aggregate([
+            {
+                $match: {
+                    timestamp: { $gte: twentyFourHoursAgo },
+                },
+            },
+            {
+                $group: {
+                    _id: {
+                        hour: { $hour: { date: '$timestamp', timezone: 'Asia/Manila' } },
+                        category: '$category',
+                    },
+                    averageHeatIndex: { $avg: '$heatIndex' },
+                },
+            },
+            {
+                $sort: { '_id.hour': 1 },
+            },
+        ]);
+
+        const labels = [];
+        const data = [];
+        const categories = [];
+
+        const currentHour = new Date().getHours();
+        for (let i = 23; i >= 0; i--) {
+            const hour = (currentHour - i + 24) % 24;
+            const matchingDataPoint = hourlyAverageData.find((entry) => entry._id.hour === hour);
+
+            if (i % 3 === 0) {
+                const hourLabel = hour < 10 ? `0${hour}` : `${hour}`;
+                labels.push(`${hourLabel}:00`);
+            } else {
+                labels.push('');
+            }
+
+            data.push(matchingDataPoint ? matchingDataPoint.averageHeatIndex : 0);
+            categories.push(matchingDataPoint ? matchingDataPoint._id.category : null);
+        }
+
+        res.status(200).json({
+            success: true,
+            data: {
+                labels,
+                data,
+                categories,
+            },
+        });
+    } catch (error) {
+        console.error('Error fetching hourly average heat index:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal server error',
         });
     }
 };
 
 
 
-module.exports = { fetchAndSaveWeatherData, searchWeatherData, calculateHeatIndex, checkTropicalCycloneSignal, checkHeatIndex, startCronJobsWeather, getWeather};
+module.exports = { fetchAndSaveWeatherData, 
+                searchWeatherData, 
+                calculateHeatIndex, 
+                checkTropicalCycloneSignal, 
+                startCronJobsWeather, 
+                getWeather, 
+                saveHeatIndex, 
+                checkHeatIndexCategory, 
+                getWeeklyAverageHeatIndex,
+                getHourlyAverageHeatIndex 
+            };

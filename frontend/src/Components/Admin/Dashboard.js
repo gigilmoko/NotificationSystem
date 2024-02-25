@@ -11,9 +11,12 @@ import Chart2 from '../Charts/Chart2.js';
 import Chart3 from '../Charts/Chart3.js';
 import Chart4 from '../Charts/Chart4.js';
 import Chart5 from '../Charts/Chart5.js';
+import HourlyHeatIndex from '../Charts/HourlyHeatIndex';
+import WeeklyHeatIndex from '../Charts/WeeklyHeatIndex';
 
 const Dashboard = () => {
   const [selectedDay, setSelectedDay] = useState(1);
+  const [selectedChart, setSelectedChart] = useState('weekly');
 
   const renderChartForSelectedDay = () => {
     switch (selectedDay) {
@@ -31,6 +34,18 @@ const Dashboard = () => {
         return null;
     }
   };
+
+  const renderSelectedChart = () => {
+    switch (selectedChart) {
+      case 'hourly':
+        return <HourlyHeatIndex />;
+      case 'weekly':
+        return <WeeklyHeatIndex />;
+      default:
+        return null;
+    }
+  };
+
   
   return (
     
@@ -110,13 +125,22 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="col-sm-12 col-xl-6">
-              <div className="bg-secondary text-center rounded p-4">
-                <div className="d-flex align-items-center justify-content-between mb-4">
-                  <h6 className="mb-0">Salse &amp; Revenue</h6>
-                  <a href="">Show All</a>
-                </div>
-                <canvas id="salse-revenue" />
+            <div className="bg-secondary text-center rounded p-4">
+              <div className="d-flex align-items-center justify-content-between mb-4">
+                <h6 className="mb-0">Heat Index</h6>
               </div>
+              <div className="d-flex justify-content-between mb-4">
+                <button onClick={() => setSelectedChart('hourly')} className={`btn ${selectedChart === 'hourly' ? 'btn-warning' : 'btn-secondary'}`}>
+                  Hourly
+                </button>
+                <button onClick={() => setSelectedChart('weekly')} className={`btn ${selectedChart === 'weekly' ? 'btn-warning' : 'btn-secondary'}`}>
+                  Weekly
+                </button>
+                {/* Add other buttons as needed */}
+              </div>
+              {/* Render the selected chart */}
+              {renderSelectedChart()}
+            </div>
             </div>
           </div>
         </div>

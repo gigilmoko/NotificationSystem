@@ -14,7 +14,7 @@ const adminsidebar = () => {
     />
 <div className="navbar-nav w-100" style = {{marginTop: '-100px'}}>
     
-<a href="index.html" className="nav-item nav-link active">
+<a href="/dashboard" className="nav-item nav-link active">
 <i className="fa fa-tachometer-alt me-2" />
 Dashboard
 </a>
@@ -57,7 +57,6 @@ Charts
   <a href="blank.html" className="dropdown-item">
     Blank Page
   </a>
- 
   
 </div>
 </div>
