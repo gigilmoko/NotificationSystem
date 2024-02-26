@@ -51,12 +51,12 @@ function Chart1() {
     };
 
     return (
-        <div className="App" style={{ height: "500" }}>
+        <div className="App" >
             <header className="App-header">
                 {Object.keys(groupedData).map((date) => (
                     <div key={date}>
-                        <h2>{`${date}`}</h2>
-                        <ResponsiveContainer width="100%" height={250}>
+                        <h3>{`${date}`}</h3>
+                        <ResponsiveContainer width="100%" height={300}>
                             <LineChart data={groupedData[date]}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="time" tickFormatter={formatXAxis} />

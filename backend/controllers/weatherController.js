@@ -169,7 +169,7 @@ function checkHeatIndexCategory(heatIndex) {
 }
 
 const startCronJobsWeather = () => {
-    cron.schedule('*/5 * * * *', async () => {
+    cron.schedule('*/20 * * * *', async () => {
         const weatherCityName = 'Taguig';
         const weatherApiKey = 'd6536e139981446b8a734cd33ee9b21e';
         
@@ -223,22 +223,26 @@ const getWeeklyAverageHeatIndex = async (req, res, next) => {
             const date = new Date(currentDate);
             date.setDate(date.getDate() - i);
             const formattedDate = date.toISOString().split('T')[0];
-
-            const matchingDataPoints = weeklyAverageData.filter((entry) => entry._id.date === formattedDate);
-
-            labels.push(formattedDate);
-
-            if (matchingDataPoints.length > 0) {
-                const averageHeatIndex = matchingDataPoints.map(point => point.averageHeatIndex);
-                data.push(averageHeatIndex);
-
-                const dateCategories = matchingDataPoints.map(point => checkHeatIndexCategory(point.averageHeatIndex));
-                categories.push(dateCategories);
-            } else {
-                data.push(0);
-                categories.push([]);
+        
+            // Exclude the current date from the averaging
+            if (i > 0) {
+                const matchingDataPoints = weeklyAverageData.filter((entry) => entry._id.date === formattedDate);
+        
+                labels.push(formattedDate);
+        
+                if (matchingDataPoints.length > 0) {
+                    const averageHeatIndex = matchingDataPoints.map(point => point.averageHeatIndex);
+                    data.push(averageHeatIndex);
+        
+                    const dateCategories = matchingDataPoints.map(point => checkHeatIndexCategory(point.averageHeatIndex));
+                    categories.push(dateCategories);
+                } else {
+                    data.push(0);
+                    categories.push([]);
+                }
             }
         }
+        
 
         res.status(200).json({
             success: true,

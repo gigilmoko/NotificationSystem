@@ -13,6 +13,7 @@ import Chart4 from '../Charts/Chart4.js';
 import Chart5 from '../Charts/Chart5.js';
 import HourlyHeatIndex from '../Charts/HourlyHeatIndex';
 import WeeklyHeatIndex from '../Charts/WeeklyHeatIndex';
+import EarthquakeChart from '../Charts/Earthquake.js';
 
 const Dashboard = () => {
   const [selectedDay, setSelectedDay] = useState(1);
@@ -109,7 +110,7 @@ const Dashboard = () => {
         {/* Sales Chart Start */}
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
-            <div className="col-m-12 col-xl-6">
+            <div className="col-sm-12 col-xl-6">
               <div className="bg-secondary text-center rounded p-4">
                 <div className="d-flex align-items-center justify-content-between mb-4">
                   <h6 className="mb-0">Daily Forecasts</h6>
@@ -125,27 +126,33 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="col-sm-12 col-xl-6">
-            <div className="bg-secondary text-center rounded p-4">
-              <div className="d-flex align-items-center justify-content-between mb-4">
-                <h6 className="mb-0">Heat Index</h6>
+              <div className="bg-secondary text-center rounded p-4">
+                <div className="d-flex align-items-center justify-content-between mb-4">
+                  <h6 className="mb-0">Heat Index</h6>
+                </div>
+                <div className="d-flex justify-content-between mb-4">
+                  <button onClick={() => setSelectedChart('hourly')} className={`btn ${selectedChart === 'hourly' ? 'btn-warning' : 'btn-secondary'}`}>
+                    Hourly
+                  </button>
+                  <button onClick={() => setSelectedChart('weekly')} className={`btn ${selectedChart === 'weekly' ? 'btn-warning' : 'btn-secondary'}`}>
+                    Weekly
+                  </button>
+                </div>
+                {renderSelectedChart()}
               </div>
-              <div className="d-flex justify-content-between mb-4">
-                <button onClick={() => setSelectedChart('hourly')} className={`btn ${selectedChart === 'hourly' ? 'btn-warning' : 'btn-secondary'}`}>
-                  Hourly
-                </button>
-                <button onClick={() => setSelectedChart('weekly')} className={`btn ${selectedChart === 'weekly' ? 'btn-warning' : 'btn-secondary'}`}>
-                  Weekly
-                </button>
-                {/* Add other buttons as needed */}
-              </div>
-              {/* Render the selected chart */}
-              {renderSelectedChart()}
-            </div>
             </div>
           </div>
         </div>
-        {/* Sales Chart End */}
-        {/* Recent Sales Start */}
+        <div className="container-fluid pt-4 px-4">
+            <div className="table-responsive">
+              <div className="bg-secondary text-center rounded p-4">
+                <div className="d-flex align-items-center justify-content-between mb-4">
+                  <h6 className="mb-0">Earthquake Data</h6>
+                </div>
+                <EarthquakeChart />
+              </div>
+            </div>
+        </div>
         <div className="container-fluid pt-4 px-4">
           <div className="bg-secondary text-center rounded p-4">
             <div className="d-flex align-items-center justify-content-between mb-4">

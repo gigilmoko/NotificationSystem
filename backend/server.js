@@ -45,7 +45,7 @@ db.once('open', async () => {
     app.use(express.json());
     app.use(cookie());
     
-    app.use('/usgs', usgsRoutes);
+    app.use('/api', usgsRoutes);
     app.use('/api', weatherRoutes);
     app.use('/api', auth);
     

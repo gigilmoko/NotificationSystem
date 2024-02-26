@@ -104,7 +104,7 @@ const fetchAndSaveData = async () => {
 };
 
 const startCronJobsEarthquake = () => {
-    cron.schedule('*/5 * * * *', async () => {
+    cron.schedule('*/20 * * * *', async () => {
         await fetchAndSaveData();
     });
 };
@@ -118,9 +118,16 @@ const getEarthquakes = async (req, res, next) => {
                 message: 'Earthquake not found'
             });
         }
+
+        // Format the time field to string (you can adjust the format as needed)
+        const formattedEarthquakes = earthquakes.map((quake) => ({
+            ...quake._doc,
+            time: quake.time.toISOString(), // Convert the time to string
+        }));
+
         res.status(200).json({
             success: true,
-            earthquakes
+            earthquakes: formattedEarthquakes,
         });
     } catch (error) {
         console.error('Error fetching earthquake data:', error);
