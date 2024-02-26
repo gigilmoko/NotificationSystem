@@ -23,6 +23,7 @@ import Chart5 from './Components/Charts/Chart5';
 import WeeklyHeatIndex from './Components/Charts/WeeklyHeatIndex';
 import HourlyHeatIndex from './Components/Charts/HourlyHeatIndex';
 import ProtectedRoute from './Components/Route/ProtectedRoute';
+import EarthquakeChart from './Components/Charts/Earthquake';
 
 function App() {
 
@@ -30,23 +31,8 @@ function App() {
     <div className="App">
         <BrowserRouter>
           <Routes>
-            {/* ----Dashboard---- */}
-            <Route
-            path="/admin/dashboard"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-            <Route
-            path="/admin/dashboard/adminEarthquake"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <AdminEarthquake />
-              </ProtectedRoute>
-            }
-          />
+            <Route path ="/admin/dashboard" element = {<ProtectedRoute isAdmin={true}><Dashboard /></ProtectedRoute> }/>
+            <Route path="/admin/dashboard/adminEarthquake" element = { <ProtectedRoute isAdmin={true}><AdminEarthquake /></ProtectedRoute>}/>
           <Route
             path="/admin/dashboard/adminWeather"
             element={
@@ -127,7 +113,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-
+          <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
             
 
             {/* ----Home---- */}
