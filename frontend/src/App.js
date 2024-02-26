@@ -14,7 +14,7 @@ import About from './Components/Home/about'
 import Dashboard from './Components/Admin/Dashboard'
 import AdminEarthquake from './Components/Admin/Earthquake';
 import AdminWeather from './Components/Admin/Weather';
-import Chart from './Components/Charts/DayForecast';
+import WeatherApp from './Components/Charts/WeatherApp';
 import Chart1 from './Components/Charts/Chart1';
 import Chart2 from './Components/Charts/Chart2';
 import Chart3 from './Components/Charts/Chart3';
@@ -41,22 +41,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-            <Route
+            {/* <Route
             path="/admin/adminChart"
             element={
               <ProtectedRoute isAdmin={true}>
                 <Chart />
               </ProtectedRoute>
             }
-          />
-            <Route
-            path="/admin/adminChart"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <Chart />
-              </ProtectedRoute>
-            }
-          />
+          /> */}
           <Route
             path="/admin/adminChart1"
             element={
@@ -114,6 +106,7 @@ function App() {
             }
           />
           <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
+          <Route path ="/userForecast" element = {<WeatherApp/>} />
             
 
             {/* ----Home---- */}
