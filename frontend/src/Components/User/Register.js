@@ -74,7 +74,7 @@ export default function Register() {
       <div className="custom-container-user">
         <Header />
         <div className="row wrapper">
-          <div className="col-10 col-lg-5 mx-auto" style={{ backgroundColor: '#323C50', marginTop: '150px' }}>
+          <div className="col-10 col-lg-5 mx-auto" style={{ backgroundColor: '#323C50', marginTop: '50px' }}>
             <form className="shadow-lg" onSubmit={handleSubmit}>
               <div className="text-center">
                 <h1 className="mb-3" style={{ fontSize: '4em', marginTop: '10px' }}>

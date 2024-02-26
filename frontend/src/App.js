@@ -30,17 +30,17 @@ function App() {
         <BrowserRouter>
           <Routes>
             {/* ----Dashboard---- */}
-            <Route path = "/dashboard" element = {<Dashboard/> }/>
-            <Route path = "/dashboard/adminEarthquake" element = {<AdminEarthquake/> }/>
-            <Route path = "/dashboard/adminWeather" element = {<AdminWeather/> }/>
-            <Route path="/adminChart" element={<Chart />} />
-            <Route path="/adminChart1" element={<Chart1 />} />
-            <Route path="/adminChart2" element={<Chart2 />} />
-            <Route path="/adminChart3" element={<Chart3 />} />
-            <Route path="/adminChart4" element={<Chart4 />} />
-            <Route path="/adminChart5" element={<Chart5 />} />
-            <Route path="/adminWeeklyHeatIndex" element={<WeeklyHeatIndex />} />
-            <Route path="/adminhourlyHeatIndex" element={<HourlyHeatIndex />} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute isAdmin={true} element={<Dashboard />} />} />
+            <Route path="/admin/dashboard/adminEarthquake" element={<ProtectedRoute isAdmin={true} element={<AdminEarthquake />} />} />
+            <Route path="/admin/dashboard/adminWeather" element={<ProtectedRoute isAdmin={true} element={<AdminWeather />} />} />
+            <Route path="/admin/adminChart" element={<ProtectedRoute isAdmin={true} element={<Chart />} />} />
+            <Route path="/admin/adminChart1" element={<ProtectedRoute isAdmin={true} element={<Chart1 />} />} />
+            <Route path="/admin/adminChart2" element={<ProtectedRoute isAdmin={true} element={<Chart2 />} />} />
+            <Route path="/admin/adminChart3" element={<ProtectedRoute isAdmin={true} element={<Chart3 />} />} />
+            <Route path="/admin/adminChart4" element={<ProtectedRoute isAdmin={true} element={<Chart4 />} />} />
+            <Route path="/admin/adminChart5" element={<ProtectedRoute isAdmin={true} element={<Chart5 />} />} />
+            <Route path="/admin/adminWeeklyHeatIndex" element={<ProtectedRoute isAdmin={true} element={<WeeklyHeatIndex />} />} />
+            <Route path="/admin/adminhourlyHeatIndex" element={<ProtectedRoute isAdmin={true} element={<HourlyHeatIndex />} />} />
 
             {/* ----Home---- */}
             <Route path = "/" element = { <NewHome/> } /> 

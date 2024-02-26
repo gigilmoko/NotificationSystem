@@ -581,10 +581,10 @@ ul {
   padding: 18px 36px;
   border-radius: 5px;
   background-color: transparent;
-  border: 1px solid #B08EAD;
+  border: 1px solid #F5E8C7;
   font-size: 15px;
   font-weight: 700;
-  color: #B08EAD;
+  color: #F5E8C7;
   text-transform: uppercase;
   font-weight: 400;
   -webkit-transition: 0.5s;
@@ -2345,17 +2345,17 @@ ul {
   transform: scale(1, 0);
   display: block;
   border: 0px solid transparent;
-  background-color: #B08EAD;
+  background-color: #001F3F;
 }
 
 /* line 135, /Applications/MAMP/htdocs/old/palash/cl/shop_html/sass/_menu.scss */
-.dropdown .dropdown-menu .dropdown-item {
+/* .dropdown .dropdown-menu .dropdown-item {
   font-size: 14px;
   padding: 8px 20px !important;
   color: #fff !important;
   background-color: #B08EAD;
   text-transform: capitalize;
-}
+} */
 
 @media (min-width: 991px) {
   /* line 147, /Applications/MAMP/htdocs/old/palash/cl/shop_html/sass/_menu.scss */

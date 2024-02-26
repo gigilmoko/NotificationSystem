@@ -24,14 +24,14 @@ const newhome = () => {
     src={bannerImage}
     alt="banner"
     className="banner-image"
-    style={{ marginTop: '-100px', width: '2000px', height: '1000px' }} // Adjust the value as needed
+    style={{ marginTop: '-200px', width: '2000px', height: '1000px' }} // Adjust the value as needed
   />
 </a>
 
     </div>
     
     <div className="banner-content content-light style1 text-center col-md-6">
-      <h2 className="banner-title" style={{ color: '#F5E8C7', marginTop: '50px' }}>Emergency Notification System</h2>
+      <h2 className="banner-title" style={{ color: '#F5E8C7', marginTop: '-120px' }}>Emergency Notification System</h2>
       {/* <div className="btn-center">
         <a href="#" className="btn btn-medium btn-light">
           About

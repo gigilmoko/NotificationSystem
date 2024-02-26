@@ -1,63 +1,80 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { Fragment, useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from '../Layout/header.js';
 import Footer from '../Layout/footer.js';
+import {authenticate} from '../../utils/helpers'
+import { getUser } from '../../utils/helpers'
 import 'react-toastify/dist/ReactToastify.css';
 import '../../assets/css/loginstyle.css';
 import '../../assets/css/flaticon.css';
 import '../../assets/css/themify-icons.css';
 
 export default function Login() {
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    });
-    
-    const [loginError, setLoginError] = useState("");
-    const navigate = useNavigate();
+   
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    // const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+    let location = useLocation();
+    const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : ''
+    // const notify = (error) => toast.error(error, {
+    //     position: toast.POSITION.BOTTOM_RIGHT
+    // });
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-    
+    const login = async (email, password) => {
         try {
-            const response = await axios.post(
-                "http://localhost:4001/api/login",
-                formData
-            );
-            
-            console.log("Response:", response); // Log the response for debugging
-            
-            if (response.status === 200) {
-                // Login successful
-                console.log("Login successful");
-                localStorage.setItem('userEmail', formData.email); // Store user email in localStorage
-                navigate("/");
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            const { data } = await axios.post(`${process.env.REACT_APP_API}/api/login`, { email, password }, config)
+            if (data.user && data.user.role === 'admin') {
+                // Redirect to admin location
+                authenticate(data, () => navigate("/admin/dashboard"));
             } else {
-                // Login failed
-                setLoginError("Invalid email or password");
+                // Redirect to regular user location
+                authenticate(data, () => navigate("/"));
             }
         } catch (error) {
-            console.error("Error occurred:", error);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log("Error status:", error.response.status);
+                console.log("Error data:", error.response.data);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.log("No response received:", error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error:", error.message);
+            }
+            // Log the invalid email or password
+            console.log("Invalid email or password:", email, password);
         }
-    };
+    }
     
-    
+    const submitHandler = (e) => {
+        e.preventDefault();
+        login(email, password)
+    }
+
+    useEffect(() => {
+        if (getUser() && redirect === 'shipping' ) {
+             navigate(`/${redirect}`)
+        }
+    }, [])
+
+   
 
     return (
         <div class="full-width-container" style={{ backgroundColor: '#001F3F' }}>
             <div class="custom-container-user" style={{ backgroundColor: '#001F3F' }}>
                 <Header/>
                 <section class="login_part section_padding">
-                    <div class="container" style={{ backgroundColor: '#323C50', marginTop: '150px', paddingBottom: '0' }}>
-                        <div class="row" style={{  }}>
+                    <div class="container" style={{ backgroundColor: '#323C50', marginTop: '50px', paddingBottom: '0' }}>
+                        <div class="row" style={{ height: '600px' }}>
                             <div className="col-lg-6 col-md-6" style={{ paddingRight: 0, paddingLeft: 0}}>
                                 <div className="login_part_text text-center">
                                     <div className="login_part_text_iner">
@@ -71,28 +88,28 @@ export default function Login() {
                                 <div className="login_part_form">
                                     <div className="login_part_form_iner">
                                         <h3 style = {{ textAlign: "Center"}}>Welcome Back ! </h3>
-                                        <form class="row contact_form" action="#" method="post" novalidate="novalidate" onSubmit={handleSubmit}>
+                                        <form class="row contact_form" action="#" method="post" novalidate="novalidate" onSubmit={submitHandler}>
                                             <div className="form-group">
-                                                <h1 className="mb-3" style={{ fontSize: '2em', marginTop: '10px' }}>Email</h1>
+                                                <h1 className="mb-3" style={{ fontSize: '2em' }}>Email</h1>
                                                 <input
+                                                    id="email_field"
                                                     type="email"
-                                                    id="Email"
-                                                    name="email"
                                                     className="form-control"
-                                                    value={formData.email}
-                                                    onChange={handleChange}
-                                                />
+                                                    value={email}
+                                                    placeholder = "Username"
+                                                    onChange={(e) => setEmail(e.target.value)}/>
                                             </div>
                                             <div className="form-group">
-                                                <h1 className="mb-3" style={{ fontSize: '2em', marginTop: '10px' }}>Password</h1>
+                                                <h1 className="mb-3" style={{ fontSize: '2em', marginTop: '15px' }}>Password</h1>
                                                 <input
-                                                    type="password"
-                                                    id="Password"
-                                                    name="password"
-                                                    value={formData.password}
-                                                    onChange={handleChange}
-                                                    className="form-control"
-                                                />
+                                                id="password_field"
+                                                type="password" // Set the type attribute to "password"
+                                                className="form-control"
+                                                placeholder="Password"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                            />
+                                               
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <button id="login_button" type="submit" className="btn_3">log in</button>

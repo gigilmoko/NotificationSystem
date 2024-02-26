@@ -1,11 +1,57 @@
-import React from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../../assets/css/normalize.css';
 import '../../assets/css/vendor.css';
 import '../../assets/css/style.css'; 
 import LogoImage from '../../assets/systempics/logo3.png';
 import { Helmet } from 'react-helmet';
+import { logout, getUser } from '../../utils/helpers';
+// import '../../assets/css/headerstyle.css'
+
+
+
 
 const Header = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  
+  const [user, setUser] = useState({});
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+ 
+
+  const logoutHandler = async () => {
+    try {
+        await axios.get(`${process.env.REACT_APP_API}/api/logout`);
+        setUser({});
+        logout(() => navigate('/'));
+        toast.success('Logged out', {
+            position: toast.POSITION.BOTTOM_RIGHT,
+        });
+        // Reload the window after logging out
+        window.location.reload();
+    } catch (error) {
+        if (error.response && error.response.data && error.response.data.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error('An error occurred while logging out');
+        }
+    }
+  };
+
+
+
+useEffect(() => {
+  const fetchedUser = getUser();
+  console.log(fetchedUser); // Log the fetched user object to inspect its structure
+  setUser(fetchedUser);
+}, []);
+
+
   return (
     <div>
       <Helmet>
@@ -40,8 +86,9 @@ const Header = () => {
           }
         `}
       </style>
+      <div className = "header-container">
       <header id="header" className="content-light">
-        <div className="header-wrap container py-3">
+        <div className="header-wrap container py-3" style = {{height: '300px'}}>
           <div className="row align-items-center">
             <div className="col-md-5 col-sm-2">
               <nav className="navbar">
@@ -86,9 +133,69 @@ const Header = () => {
                       </a>
                     </li>
                     <li>
-                      <a href="/login" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
-                        Login
-                      </a>
+                    {user ? (
+  <div className="menu-itemhome1 dropdown">
+    <button
+      className="btn text-white mr-4"
+      type="button"
+      id="dropDownMenuButton"
+      aria-haspopup="true"
+      aria-expanded="false"
+      style={{ color: '#b08ead', backgroundColor: 'transparent', border: 'none' }}
+    >
+      {user.avatar && ( // Check if avatar URL is present
+        <figure className="avatar avatar-nav">
+          <img
+            src={user.avatar} // Use user.avatar directly as the src attribute
+            alt={`${user.name}'s Avatar`}
+            className="rounded-circle"
+            style = {{ height: '50px', width: '50px'}}
+          />
+        </figure>
+        
+      )}
+      
+      <label style={{ color: '#F5E8C7' }}>{user && user.name}</label>
+    </button>
+
+      <div
+    className="dropdown-menu dropdown-menu-right"
+    aria-labelledby="dropDownMenuButton"
+    style={{ maxHeight: '300px', overflowY: 'auto' }} // Adjusted maxHeight and overflowY
+  >
+    {user && user.role === 'admin' && (
+      <Link
+        className="dropdown-item"
+        to="/admin/dashboard"
+        style = {{color: '#F5E8C7'}}
+      >
+        Dashboard
+      </Link>
+    )}
+  
+    <Link className="dropdown-item"  style = {{color: '#F5E8C7'}} to="/profile">
+      Profile
+    </Link>
+    <Link
+      className="dropdown-item text-danger"
+     
+      onClick={logoutHandler}
+      to="/"
+      data-toggle="modal"
+      data-target="#logoutModal"
+
+    >
+      Logout
+    </Link>
+  </div>
+    </div>
+  ) : (
+    <a href="/login" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
+    Login
+  </a>
+  )}
+
+
                     </li>
                   </ul>
                 </div>
@@ -98,6 +205,9 @@ const Header = () => {
         </div>
       </header>
     </div>
+   
+    </div>
+    
   );
 };
 
