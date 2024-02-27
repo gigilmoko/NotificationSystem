@@ -3,9 +3,11 @@ const cookie = require('cookie-parser')
 const cors = require('cors')
 const cloudinary = require('cloudinary');
 require('dotenv').config({ path: '../config/config.env' });
+// const multer = require('multer');
 
 
 const mongoose = require('mongoose');
+const cron = require('node-cron');
 const usgsRoutes = require('./routes/usgs');
 const weatherRoutes = require('./routes/weatherRoutes');
 const auth = require('./routes/auth')
@@ -45,8 +47,15 @@ db.once('open', async () => {
     app.use(express.json());
     app.use(cookie());
     
+<<<<<<< Updated upstream
     app.use('/api', usgsRoutes);
+=======
+    // Define routes
+    app.use('/usgs', usgsRoutes);
+>>>>>>> Stashed changes
     app.use('/api', weatherRoutes);
     app.use('/api', auth);
+
+    // Start the Express server
     
 });

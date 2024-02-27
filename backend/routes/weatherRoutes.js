@@ -1,6 +1,19 @@
 const express = require('express');
-const {  searchWeatherData, getWeather, getWeeklyAverageHeatIndex, getHourlyAverageHeatIndex} = require('../controllers/weatherController');
+const { fetchAndSaveWeatherData, searchWeatherData, getWeather} = require('../controllers/weatherController');
+// const { manualInsert } = require('../controllers/testWeather');
 const router = express.Router();
+
+// router.get('/fetchAndSaveWeatherData', async (req, res) => {
+//     try {
+//         const cityName = 'Taguig';
+//         const apiKey = 'd6536e139981446b8a734cd33ee9b21e';
+//         await fetchAndSaveWeatherData(cityName, apiKey);
+//         res.json({ success: true, message: 'Data saved successfully' });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ success: false, message: 'Internal server error' });
+//     }
+// });
 
 router.get('/searchWeatherData/:cityName', async (req, res) => {
     try {
@@ -13,8 +26,16 @@ router.get('/searchWeatherData/:cityName', async (req, res) => {
     }
 });
 router.get('/getWeather', getWeather);
-router.get('/getWeeklyAverageHeatIndex', getWeeklyAverageHeatIndex)
-router.get('/getHourlyAverageHeatIndex', getHourlyAverageHeatIndex)
+
+// router.get('/manualInsert', async (req, res) => {
+//     try {
+//         await manualInsert();
+//         res.json({ success: true, message: 'Test data saved successfully' });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ success: false, message: 'Internal server error' });
+//     }
+// });
 
 
 module.exports = router;

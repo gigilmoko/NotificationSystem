@@ -13,7 +13,7 @@ router.post('/login', loginUser);
 router.get('/logout', logout);
 router.post('/password/forgot', forgotPassword);
 router.put('/password/reset/:token', resetPassword);
-// router.get('/me', isAuthenticatedUser, getUserProfile);
+router.get('/me', isAuthenticatedUser, getUserProfile);
 // router.put('/password/update', isAuthenticatedUser, updatePassword);
 router.put('/password/update', updatePassword);
 // router.put('/me/update', isAuthenticatedUser, upload.single("avatar"), updateProfile);

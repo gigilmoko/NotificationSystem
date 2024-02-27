@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
+// npnpm st
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 const bcryptjs = require('bcryptjs');
@@ -37,28 +38,27 @@ exports.registerUser = async (req, res, next) => {
 };
 
 exports.loginUser = async (req, res, next) => {
-    const { email, password } = req.body;
-    try {
-        const validUser = await User.findOne({ email });
-        if (!validUser) return next(errorHandler(404, "User not found!"));
+   const { email, password } = req.body;
 
-        const validPassword = bcryptjs.compareSync(password, validUser.password);
-        if (!validPassword) return next(errorHandler(401, "Wrong credentials!"));
-
-        const token = jwt.sign(
-        { id: validUser._id, role: validUser.role },
-        process.env.JWT_SECRET,
-        { expiresIn: "1h" }
-        ); 
-        const { password: pass, ...rest } = validUser._doc;
-
-        res
-        .cookie("access_token", token, { httpOnly: true })
-        .status(200)
-        .json({ ...rest, role: validUser.role });
-    } catch (error) {
-        next(error);
+    // Checks if email and password is entered by user
+    if (!email || !password) {
+        return res.status(400).json({ error: 'Please enter email & password' })
     }
+
+    // Finding user in database
+    const user = await User.findOne({ email }).select('+password')
+
+    if (!user) {
+        return res.status(401).json({ message: 'Invalid Email or Password' })
+    }
+
+    const isPasswordMatched = await user.comparePassword(password);
+
+    if (!isPasswordMatched) {
+        return res.status(401).json({ message: 'Invalid Email or Password' })
+    }
+
+    sendToken(user, 200, res)
 };
 
 exports.logout = async (req, res, next) => {
@@ -211,13 +211,33 @@ exports.deleteUser = async (req, res, next) => {
 };
 
 //Needs Frontend
+// c
+
 exports.getUserProfile = async (req, res, next) => {
+  try {
+    // Retrieve user data based on user ID from request object
     const user = await User.findById(req.user.id);
   
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // If user exists, return user data
     res.status(200).json({
       success: true,
       user,
     });
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
 };
 
 //Needs Frontend

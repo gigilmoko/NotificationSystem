@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+
 require('dotenv').config({ path: './config/config.env' });
+// const User = mongoose.model("User", userSchema);
 
 const userSchema = new mongoose.Schema(
   {
@@ -33,7 +36,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
+
 
 
 userSchema.pre("save", async function (next) {
@@ -57,6 +60,7 @@ userSchema.methods.getResetPasswordToken = function () {
   // Generate token
   const resetToken = crypto.randomBytes(20).toString("hex");
 
+  // Hash and set to resetPasswordToken
   this.resetPasswordToken = crypto
     .createHash("sha256")
     .update(resetToken)
