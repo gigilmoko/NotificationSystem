@@ -1,6 +1,10 @@
+
 const axios = require('axios');
 const WeatherData = require('../models/weather');
+const HeatIndex = require('../models/heat').HeatIndex;
 const cron = require('node-cron');
+// const { createHeatAlert } = require('../controllers/reportController')
+const { io } = require('../server');
 
 async function fetchAndSaveWeatherData(cityName, apiKey) {
     try {
@@ -26,8 +30,8 @@ async function fetchAndSaveWeatherData(cityName, apiKey) {
         console.log('Tropical Cyclone Signal Category:', cycloneSignalCategory);
 
         // Check conditions for heat index
-        const heatIndexCategory = checkHeatIndex(heatIndex);
-        console.log('Heat Index Category:', heatIndexCategory);
+        // const heatIndexCategory = checkHeatIndex(heatIndex);
+        // console.log('Heat Index Category:', heatIndexCategory);
 
         const newWeatherData = new WeatherData({
             city: weatherData.name,
@@ -100,35 +104,6 @@ function checkTropicalCycloneSignal(weatherData) {
     }
 }
 
-function checkHeatIndex(heatIndex) {
-    const heatIndexNumber = parseFloat(heatIndex);
-
-    if (!isNaN(heatIndexNumber)) {
-        if (heatIndexNumber >= 27 && heatIndexNumber < 32) {
-            return 'Caution';
-        } else if (heatIndexNumber >= 32 && heatIndexNumber < 39) {
-            return 'Extreme Caution';
-        } else if (heatIndexNumber >= 39 && heatIndexNumber < 51) {
-            return 'Danger';
-        } else if (heatIndexNumber >= 51) {
-            return 'Extreme Danger';
-        } else {
-            return 'Normal Heat Index Today';
-        }
-    } else {
-        console.error('Invalid heatIndex value:', heatIndex);
-        throw new Error('Error fetching and saving weather data');
-    }
-}
-
-const startCronJobsWeather = () => {
-    cron.schedule('* * * * *', async () => {
-        const weatherCityName = 'Taguig';
-        const weatherApiKey = 'd6536e139981446b8a734cd33ee9b21e';
-        await fetchAndSaveWeatherData(weatherCityName, weatherApiKey);
-    });
-};
-
 const getWeather = async (req, res, next) => {
     try {
         const weathers = await WeatherData.find();
@@ -151,7 +126,6 @@ const getWeather = async (req, res, next) => {
     }
 };
 
-<<<<<<< Updated upstream
 const saveHeatIndex = async (weatherCityName, weatherApiKey) => {
     try {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${weatherCityName}&appid=${weatherApiKey}`);
@@ -162,13 +136,21 @@ const saveHeatIndex = async (weatherCityName, weatherApiKey) => {
         const heatIndexValue = calculateHeatIndex(parseFloat(temperatureCelsius), parseFloat(humidity));
         const heatIndexCategory = checkHeatIndexCategory(heatIndexValue);
 
-        const newHeatIndex = new HeatIndex({
-            heatIndex: heatIndexValue.toFixed(2),
-            category: heatIndexCategory,
-        });
-        await newHeatIndex.save();
+        // Save the heat index only if it's "Caution" and above
+        if (heatIndexCategory !== 'Normal Heat Index Today') {
+            const newHeatIndex = new HeatIndex({
+                heatIndex: heatIndexValue.toFixed(2),
+                category: heatIndexCategory,
+            });
 
-        console.log('Heat Index saved:', newHeatIndex);
+            await newHeatIndex.save();
+            console.log('Heat Index saved:', newHeatIndex);
+
+            // Check if the heat index is higher than caution, then create a heat alert
+            if (heatIndexCategory !== 'Caution') {
+                await createHeatAlert(newHeatIndex._id, heatIndexCategory, `Details based on ${heatIndexCategory}`);
+            }
+        }
 
     } catch (error) {
         console.error('Error saving heat index:', error.message);
@@ -197,13 +179,13 @@ function checkHeatIndexCategory(heatIndex) {
     }
 }
 
-const startCronJobsWeather = () => {
-    cron.schedule('*/20 * * * *', async () => {
+const startCronJobsWeather = (io) => {
+    cron.schedule('*/1 * * * *', async () => {
         const weatherCityName = 'Taguig';
         const weatherApiKey = 'd6536e139981446b8a734cd33ee9b21e';
         
         // Call the function to save the heat index
-        await saveHeatIndex(weatherCityName, weatherApiKey);
+        await saveHeatIndex(weatherCityName, weatherApiKey, io);
 
         await fetchAndSaveWeatherData(weatherCityName, weatherApiKey);
     });
@@ -365,8 +347,3 @@ module.exports = { fetchAndSaveWeatherData,
                 getWeeklyAverageHeatIndex,
                 getHourlyAverageHeatIndex 
             };
-=======
-
-
-module.exports = { fetchAndSaveWeatherData, searchWeatherData, calculateHeatIndex, checkTropicalCycloneSignal, checkHeatIndex, startCronJobsWeather, getWeather};
->>>>>>> Stashed changes

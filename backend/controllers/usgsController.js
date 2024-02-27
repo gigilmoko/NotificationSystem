@@ -1,3 +1,4 @@
+
 const axios = require('axios');
 const UsgsData = require('../models/UsgsData')
 const cron = require('node-cron');
@@ -104,11 +105,7 @@ const fetchAndSaveData = async () => {
 };
 
 const startCronJobsEarthquake = () => {
-<<<<<<< Updated upstream
     cron.schedule('*/20 * * * *', async () => {
-=======
-    cron.schedule('* * * * *', async () => {
->>>>>>> Stashed changes
         await fetchAndSaveData();
     });
 };

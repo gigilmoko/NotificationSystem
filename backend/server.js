@@ -47,12 +47,7 @@ db.once('open', async () => {
     app.use(express.json());
     app.use(cookie());
     
-<<<<<<< Updated upstream
     app.use('/api', usgsRoutes);
-=======
-    // Define routes
-    app.use('/usgs', usgsRoutes);
->>>>>>> Stashed changes
     app.use('/api', weatherRoutes);
     app.use('/api', auth);
 
