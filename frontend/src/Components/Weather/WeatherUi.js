@@ -18,41 +18,41 @@ const getDayOfWeek = (index) => {
 const renderWeatherIcon = (iconCode, isDay) => {
   switch (iconCode) {
     case '01d':
-      return <WiDaySunny style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiDaySunny style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '01n':
-      return <WiNightClear style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiNightClear style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '02d':
-      return <WiDayCloudy style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiDayCloudy style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '02n':
-      return <WiNightAltCloudy style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiNightAltCloudy style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '03d':
-      return <WiDayCloudyHigh style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiDayCloudyHigh style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '03n':
-      return <WiNightAltCloudyHigh style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiNightAltCloudyHigh style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '04d':
-      return <WiDayCloudyHigh style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiDayCloudyHigh style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '04n':
-      return <WiNightAltCloudyHigh style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiNightAltCloudyHigh style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '09d':
-      return <WiDayShowers style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiDayShowers style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '09n':
-      return <WiNightAltShowers style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiNightAltShowers style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '10d':
-      return <WiDayRain style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiDayRain style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '10n':
-      return <WiNightAltRain style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiNightAltRain style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '11d':
-      return <WiDayThunderstorm style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiDayThunderstorm style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '11n':
-      return <WiNightAltThunderstorm style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiNightAltThunderstorm style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '13d':
-      return <WiDaySnow style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiDaySnow style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '13n':
-      return <WiNightAltSnow style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiNightAltSnow style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '50d':
-      return <WiFog style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiFog style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     case '50n':
-      return <WiFog style={{ fontSize: '3em', fontWeight: 'bold' }} />;
+      return <WiFog style={{ fontSize: '2em', fontWeight: 'bold' }} />;
     default:
       return null;
   }
