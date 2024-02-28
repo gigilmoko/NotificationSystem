@@ -1,6 +1,8 @@
 import '../../assets/css/weather.css'
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from '../Layout/header'
+import Footer from '../Layout/footer'
 
 const api = {
     key: "d6536e139981446b8a734cd33ee9b21e",
@@ -20,6 +22,9 @@ const WeatherUi = () => {
         // Convert current time to Philippine time
         const currentDate = new Date();
         const philippineTimezone = "Asia/Manila";
+        
+
+      
 
         axios
         .get(`${api.base}weather?q=${defaultCity}&units=metric&APPID=${api.key}`)
@@ -76,31 +81,31 @@ const WeatherUi = () => {
         });
     }, []);
   return (
-    <div><section className="vh-100" style={{ backgroundColor: "#C1CFEA" }}>
-    <div className="container py-5 h-100">
+    <div style={{ backgroundColor: "#001F3F" }}>
+        <Header/>
+        <section className="vh-100"  >
+    <div className="container py-5 h-100" >
       <div
         className="row d-flex justify-content-center align-items-center h-100"
         style={{ color: "#282828" }}
       >
         <div className="col-md-9 col-lg-7 col-xl-5">
-          <div className="card mb-4 gradient-custom" style={{ borderRadius: 25 }}>
+          <div className="card mb-4 gradient-custom" style={{ borderRadius: 25, height: '210px', width: '524px'}}>
             <div className="card-body p-4">
               <div id="demo1" className="carousel slide" data-ride="carousel">
                 {/* Indicators */}
-                <ul className="carousel-indicators mb-0">
-                  <li data-target="#demo1" data-slide-to={0} className="active" />
-                  <li data-target="#demo1" data-slide-to={1} />
-                  <li data-target="#demo1" data-slide-to={2} />
-                </ul>
+               
                 {/* Carousel inner */}
                 <div className="carousel-inner">
                   <div className="carousel-item active">
                     <div className="d-flex justify-content-between mb-4 pb-2">
                       <div>
                         <h2 className="display-2">
-                          <strong style = {{color: 'black'}}>23°C</strong>
+                          <strong style = {{color: 'black'}}>{currentWeather.temp}°C</strong>
                         </h2>
-                        <p className="text-muted mb-0">Taguig, Philippines</p>
+                        
+                        <p className="text-muted mb-0" style = {{marginTop: '-90px'}}>Taguig, Philippines</p>
+                        
                       </div>
                       <div>
                         <img
@@ -114,124 +119,45 @@ const WeatherUi = () => {
               </div>
             </div>
           </div>
-          <div className="card mb-4" style={{ borderRadius: 25 }}>
+          <div className="card mb-4" style={{ borderRadius: 25, height: '210px', width: '524px'}}>
             <div className="card-body p-4">
               <div id="demo2" className="carousel slide" data-ride="carousel">
-                {/* Indicators */}
-                <ul className="carousel-indicators mb-0">
-                  <li data-target="#demo2" data-slide-to={0} />
-                  <li data-target="#demo2" data-slide-to={1} className="active" />
-                  <li data-target="#demo2" data-slide-to={2} />
-                </ul>
-                {/* Carousel inner */}
-                <div className="carousel-inner">
-                  <div className="carousel-item active">
-                    <div className="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
-                      <div className="flex-column">
-                        <p className="small">
-                          <strong>21°C</strong>
-                        </p>
-                        <i
-                          className="fas fa-sun fa-2x mb-3"
-                          style={{ color: "#ddd" }}
-                        />
-                        <p className="mb-0">
-                          <strong>12:00</strong>
-                        </p>
-                        <p
-                          className="mb-0 text-muted"
-                          style={{ fontSize: ".65rem" }}
-                        >
-                          PM
-                        </p>
-                      </div>
-                      <div className="flex-column">
-                        <p className="small">
-                          <strong>2°C</strong>
-                        </p>
-                        <i
-                          className="fas fa-sun fa-2x mb-3"
-                          style={{ color: "#ddd" }}
-                        />
-                        <p className="mb-0">
-                          <strong>1:00</strong>
-                        </p>
-                        <p
-                          className="mb-0 text-muted"
-                          style={{ fontSize: ".65rem" }}
-                        >
-                          PM
-                        </p>
-                      </div>
-                      <div className="flex-column">
-                        <p className="small">
-                          <strong>20°C</strong>
-                        </p>
-                        <i
-                          className="fas fa-cloud fa-2x mb-3"
-                          style={{ color: "#ddd" }}
-                        />
-                        <p className="mb-0">
-                          <strong>2:00</strong>
-                        </p>
-                        <p
-                          className="mb-0 text-muted"
-                          style={{ fontSize: ".65rem" }}
-                        >
-                          PM
-                        </p>
-                      </div>
-                      <div className="flex-column">
-                        <p className="small">
-                          <strong>19°C</strong>
-                        </p>
-                        <i
-                          className="fas fa-cloud fa-2x mb-3"
-                          style={{ color: "#ddd" }}
-                        />
-                        <p className="mb-0">
-                          <strong>3:00</strong>
-                        </p>
-                        <p
-                          className="mb-0 text-muted"
-                          style={{ fontSize: ".65rem" }}
-                        >
-                          PM
-                        </p>
-                      </div>
-                      <div className="flex-column">
-                        <p className="small">
-                          <strong>18°C</strong>
-                        </p>
-                        <i
-                          className="fas fa-cloud-showers-heavy fa-2x mb-3"
-                          style={{ color: "#ddd" }}
-                        />
-                        <p className="mb-0">
-                          <strong>4:00</strong>
-                        </p>
-                        <p
-                          className="mb-0 text-muted"
-                          style={{ fontSize: ".65rem" }}
-                        >
-                          PM
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+             
+              <div className="carousel-inner">
+  <div className="carousel-item active">
+    <div className="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
+      {next5HoursForecast.map((item, index) => (
+        <div key={index} className="flex-column">
+          <p className="small">
+            <strong>{item.temp}°C</strong>
+          </p>
+          {/* Conditionally render the icon based on weather condition */}
+          {item.icon === "Clouds" ? (
+            // Render sun icon if weather condition is "Clear"
+            <i className="fas fa-sun fa-2x mb-3" style={{ color: "#ddd" }} />
+          ) : (
+            // Render default icon for other weather conditions
+            <i className={`fas fa-${item.icon} fa-2x mb-3`} style={{ color: "#ddd" }} />
+          )}
+          <p className="mb-0">
+            <strong>{item.time}</strong>
+          </p>
+          <p className="mb-0 text-muted" style={{ fontSize: ".65rem" }}>
+            PM
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
               </div>
             </div>
           </div>
-          <div className="card" style={{ borderRadius: 25 }}>
+          <div className="card" style={{ borderRadius: 25, height: '210px', width: '524px'}}>
             <div className="card-body p-4">
               <div id="demo3" className="carousel slide" data-ride="carousel">
                 {/* Indicators */}
-                <ul className="carousel-indicators mb-0">
-                  <li data-target="#demo3" data-slide-to={0} />
-                  <li data-target="#demo3" data-slide-to={1} />
-                  <li data-target="#demo3" data-slide-to={2} className="active" />
-                </ul>
+               
                 {/* Carousel inner */}
                 <div className="carousel-inner">
                   <div className="carousel-item active">
@@ -306,6 +232,7 @@ const WeatherUi = () => {
       </div>
     </div>
   </section>
+  <Footer/>
   </div>
   )
 }
