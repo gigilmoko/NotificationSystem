@@ -2,28 +2,30 @@ import React from 'react'
 import LogoImage from '../../assets/systempics/logo3.png'
 // import { Link } from 'react-router-dom'
 
-const adminsidebar = () => {
+const AdminSidebar = () => {
   return (
     <div><nav className="navbar bg-secondary navbar-dark" style={{ height: '96vh' }}>
         
-    <img
-      src={LogoImage}
-      alt="logo"
-      className="brand-image"
-      style={{ width: '80px', height: '80px', marginLeft: '70px', marginTop: '-40px' }} // Adjust the width and height as needed
-    />
+        <a href="/">
+  <img
+    src={LogoImage}
+    alt="logo"
+    className="brand-image"
+    style={{ width: '80px', height: '80px', marginLeft: '70px', marginTop: '-40px' }}
+  />
+</a>
 <div className="navbar-nav w-100" style = {{marginTop: '-100px'}}>
     
-<a href="/dashboard" className="nav-item nav-link active">
+<a href="/admin/dashboard" className="nav-item nav-link active">
 <i className="fa fa-tachometer-alt me-2" />
 Dashboard
 </a>
 
-<a href="/dashboard/adminEarthquake" className="nav-item nav-link">
+<a href="/admin/dashboard/adminEarthquake" className="nav-item nav-link">
 <i className="fa fa-th me-2" />
 Earthquake
 </a>
-<a href="/dashboard/adminWeather" className="nav-item nav-link">
+<a href="/admin/dashboard/adminWeather" className="nav-item nav-link">
 <i className="fa fa-keyboard me-2" />
 Weather
 </a>
@@ -65,4 +67,4 @@ Charts
   )
 }
 
-export default adminsidebar;
+export default AdminSidebar;

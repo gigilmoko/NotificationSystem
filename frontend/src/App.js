@@ -11,6 +11,7 @@ import Login from './Components/User/Login'
 import Register from './Components/User/Register'
 import NewHome from './Components/Home/newhome'
 import About from './Components/Home/about'
+import Profile from './Components/User/Profile'
 import Dashboard from './Components/Admin/Dashboard'
 import AdminEarthquake from './Components/Admin/Earthquake';
 import AdminWeather from './Components/Admin/Weather';
@@ -118,6 +119,7 @@ function App() {
             {/* ----User---- */}
             <Route path = "/login" element = { <Login/> } /> 
             <Route path = "/register" element = { <Register/> } /> 
+            <Route path = "/profile" element = { <Profile/> } />
 
           </Routes>
           </BrowserRouter>

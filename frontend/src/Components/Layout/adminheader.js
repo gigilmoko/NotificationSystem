@@ -1,8 +1,42 @@
-import React from 'react'
+import React, { Fragment, useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { logout, getUser } from '../../utils/helpers';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const adminheader = () => {
+const AdminHeader = () => {
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  
+  const logoutHandler = async () => {
+    try {
+        await axios.get(`${process.env.REACT_APP_API}/api/logout`);
+        setUser({});
+        logout(() => navigate('/'));
+        toast.success('Logged out', {
+            position: toast.POSITION.BOTTOM_RIGHT,
+        });
+        // Reload the window after logging out
+        window.location.reload();
+    } catch (error) {
+        if (error.response && error.response.data && error.response.data.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error('An error occurred while logging out');
+        }
+    }
+  };
+
+  useEffect(() => {
+    const fetchedUser = getUser();
+    console.log(fetchedUser); // Log the fetched user object to inspect its structure
+    setUser(fetchedUser);
+  }, []);
+
+
   return (
-    <div><nav className="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0 ">
+    <div><nav className="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0 " style = {{marginLeft: '26px'}}>
     <a href="index.html" className="navbar-brand d-flex d-lg-none me-4">
       <h2 className="text-primary mb-0">
         <i className="fa fa-user-edit" />
@@ -102,20 +136,20 @@ const adminheader = () => {
         >
           <img
             className="rounded-circle me-lg-2"
-            src="img/user.jpg"
+            src= {user.avatar}
             alt=""
             style={{ width: 40, height: 40 }}
           />
-          <span className="d-none d-lg-inline-flex">John Doe</span>
+          <span className="d-none d-lg-inline-flex">{user.name}</span>
         </a>
         <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-          <a href="#" className="dropdown-item">
+          <a href="/profile" className="dropdown-item">
             My Profile
           </a>
           <a href="#" className="dropdown-item">
             Settings
           </a>
-          <a href="#" className="dropdown-item">
+          <a href="#" className="dropdown-item" onClick={logoutHandler}>
             Log Out
           </a>
         </div>
@@ -125,4 +159,4 @@ const adminheader = () => {
   )
 }
 
-export default adminheader;
+export default AdminHeader;

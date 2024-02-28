@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import Sidebar from '../Layout/adminsidebar.js'
+import Sidebar from '../Layout/AdminSidebar.js'
 import axios from 'axios'
 import { getToken } from "../../utils/helpers";
 import { MDBDataTable } from 'mdbreact'

@@ -4,8 +4,8 @@ import '../../assets/css/bootstrap2.min.css'
 import '../../assets/css/dashboardstyle.css'
 
 import Helmeth from '../Layout/adminhelmet.js'
-import Sidebar from '../Layout/adminsidebar.js'
-import HeaderNavbar from '../Layout/adminheader.js'
+import Sidebar from '../Layout/AdminSidebar.js'
+import HeaderNavbar from '../Layout/AdminHeader.js'
 import Chart1 from '../Charts/Chart1.js';
 import Chart2 from '../Charts/Chart2.js';
 import Chart3 from '../Charts/Chart3.js';
@@ -111,7 +111,7 @@ const Dashboard = () => {
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
             <div className="col-sm-12 col-xl-6">
-              <div className="bg-secondary text-center rounded p-4">
+              <div className="bg-secondary text-center rounded p-4" style = {{height: '550px'}}>
                 <div className="d-flex align-items-center justify-content-between mb-4">
                   <h6 className="mb-0">Daily Forecasts</h6>
                 </div>
@@ -126,7 +126,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="col-sm-12 col-xl-6">
-              <div className="bg-secondary text-center rounded p-4">
+              <div className="bg-secondary text-center rounded p-4" style = {{height: '550px'}}>
                 <div className="d-flex align-items-center justify-content-between mb-4">
                   <h6 className="mb-0">Heat Index</h6>
                 </div>
