@@ -67,7 +67,7 @@ const Dashboard = () => {
         <HeaderNavbar/>
         {/* Navbar End */}
         {/* Sale & Revenue Start */}
-        <div className="container-fluid pt-4 px-4">
+        {/* <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
             <div className="col-sm-6 col-xl-3">
               <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
@@ -105,7 +105,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* Sale & Revenue End */}
         {/* Sales Chart Start */}
         <div className="container-fluid pt-4 px-4">
@@ -153,7 +153,7 @@ const Dashboard = () => {
               </div>
             </div>
         </div>
-        <div className="container-fluid pt-4 px-4">
+        {/* <div className="container-fluid pt-4 px-4">
           <div className="bg-secondary text-center rounded p-4">
             <div className="d-flex align-items-center justify-content-between mb-4">
               <h6 className="mb-0">Recent Salse</h6>
@@ -254,10 +254,10 @@ const Dashboard = () => {
               </table>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* Recent Sales End */}
         {/* Widgets Start */}
-        <div className="container-fluid pt-4 px-4">
+        {/* <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
             <div className="col-sm-12 col-md-6 col-xl-4">
               <div className="h-100 bg-secondary rounded p-4">
@@ -416,7 +416,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <br/>
     
       </div>
