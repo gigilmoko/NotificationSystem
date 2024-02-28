@@ -113,7 +113,7 @@ const userList = () => {
             email: user.email,
             role: user.role,
             image: avatarURL && (
-                <img src={avatarURL} alt="User Avatar" style={{ width: '100px', height: 'auto' }} />
+                <img src={avatarURL} alt="User Avatar" style={{ width: '75px', height: '75px' }} />
             ),
         });
     });

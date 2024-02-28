@@ -11,10 +11,10 @@ const AdminSidebar = () => {
     src={LogoImage}
     alt="logo"
     className="brand-image"
-    style={{ width: '120px', height: '120px', marginLeft: '50px', marginTop: '-40px' }}
+    style={{ width: '120px', height: '120px', marginLeft: '50px', marginTop: '-70px' }}
   />
 </a>
-<div className="navbar-nav w-100" style = {{marginTop: '-100px'}}>
+<div className="navbar-nav w-100" style = {{marginTop: '-300px'}}>
     
 <a href="/admin/dashboard" className="nav-item nav-link active" style = {{ color: '#F5E8C7'}}>
 <i className="fa fa-tachometer-alt me-2" />

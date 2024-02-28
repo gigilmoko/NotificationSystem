@@ -101,7 +101,7 @@ const AdminWeather = () => {
 
     return (
         <Fragment>
-           <div class = "custom-container" style = {{ backgroundColor: '#001F3F', height: '100%', width: '100%', overflow: 'hidden'}}>
+           <div class = "custom-container" style = {{ backgroundColor: '#001F3F', height: '100%', width: '100%', overflow: 'hidden', minHeight: '100vh'}}>
             
                  <div className="row">
                 

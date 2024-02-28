@@ -63,7 +63,7 @@ const AdminEarthquake = () => {
 
     return (
         <Fragment>
-            <div class = "custom-container" style = {{ backgroundColor: '#001F3F', height: '100%', width: '100%',  overflow: 'hidden'}}>
+            <div class = "custom-container" style = {{ backgroundColor: '#001F3F', height: '100%', width: '100%', minHeight: '100vh',  overflow: 'hidden'}}>
                  <div className="row">
                 
                 <div className="col-12 col-md-2">
