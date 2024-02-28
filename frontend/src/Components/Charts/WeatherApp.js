@@ -18,13 +18,16 @@ function WeatherApp() {
     const [currentWeather, setCurrentWeather] = useState({});
     const [next5HoursForecast, setNext5HoursForecast] = useState([]);
     const [temperatureRange, setTemperatureRange] = useState([]);
+    const [currentDate, setCurrentDate] = useState("");
 
     useEffect(() => {
         const defaultCity = "Taguig";
-
-        // Convert current time to Philippine time
         const currentDate = new Date();
         const philippineTimezone = "Asia/Manila";
+        const currentDateFormatted = currentDate.toLocaleDateString("en-US", {
+            timeZone: philippineTimezone,
+        });
+        setCurrentDate(currentDateFormatted);
 
         axios
         .get(`${api.base}weather?q=${defaultCity}&units=metric&APPID=${api.key}`)
@@ -79,14 +82,12 @@ function WeatherApp() {
         .catch((error) => {
             console.error("Error fetching forecast data:", error);
         });
-    }, []);
+    }, [currentDate]);
 
     return (
         <div className="App">
         <header className="App-header">
             <h1 style={{ color: "White" }}>Weather App</h1>
-
-            {/* Current Weather Card */}
             {currentWeather.temp && (
             <MDBCard
                 className="mb-4 gradient-custom"
@@ -101,6 +102,7 @@ function WeatherApp() {
                     <h1 style={{ color: "White" }} className="text-muted mb-0">
                         Taguig City
                     </h1>
+                    <h2 style={{ color: "White" }}>{currentDate}</h2>
                     </MDBCol>
                 </div>
                 <div className="text-center mt-4">

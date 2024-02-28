@@ -38,65 +38,16 @@ function App() {
             <Route path="/admin/dashboard/adminEarthquake" element = { <ProtectedRoute isAdmin={true}><AdminEarthquake /></ProtectedRoute>}/>
             <Route path="/admin/dashboard/adminWeather" element={ <ProtectedRoute isAdmin={true}> <AdminWeather /> </ProtectedRoute>}/>
             <Route path="/admin/dashboard/adminUser" element={ <ProtectedRoute isAdmin={true}> <AdminUsers /> </ProtectedRoute>}/>
-          
-          <Route
-            path="/admin/adminChart1"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <Chart1 />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/adminChart2"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <Chart2 />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/adminChart3"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <Chart3 />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/adminChart4"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <Chart4 />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/adminChart5"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <Chart5 />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/adminhourlyHeatIndex"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <HourlyHeatIndex />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/adminWeeklyHeatIndex"
-            element={
-              <ProtectedRoute isAdmin={true}>
-                <WeeklyHeatIndex />
-              </ProtectedRoute>
-            }
-          />
-          <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
-          <Route path ="/userForecast" element = {<WeatherApp/>} />
+            <Route path="/admin/adminChart1" element={ <ProtectedRoute isAdmin={true}> <Chart1 /> </ProtectedRoute> }  />
+            <Route path="/admin/adminChart2" element={ <ProtectedRoute isAdmin={true}> <Chart2 /> </ProtectedRoute> } />
+            <Route path="/admin/adminChart3" element={ <ProtectedRoute isAdmin={true}> <Chart3 /> </ProtectedRoute> } />
+            <Route path="/admin/adminChart4" element={ <ProtectedRoute isAdmin={true}> <Chart4 /> </ProtectedRoute> } />
+            <Route path="/admin/adminChart5" element={ <ProtectedRoute isAdmin={true}> <Chart5 /> </ProtectedRoute> } />
+            <Route path="/admin/adminhourlyHeatIndex" element={ <ProtectedRoute isAdmin={true}> <HourlyHeatIndex /> </ProtectedRoute> }/>
+            <Route path="/admin/adminWeeklyHeatIndex" element={ <ProtectedRoute isAdmin={true}> <WeeklyHeatIndex /> </ProtectedRoute>}/>
+
+            <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
+            <Route path ="/userForecast" element = {<WeatherApp/>} />
             
 
             {/* ----Home---- */}
