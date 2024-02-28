@@ -34,13 +34,7 @@ const Weather = () => {
     <div className="App" style={{ backgroundColor: '#001F3F' }}>
       <Header />
       <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+  
       <h1 style={{ color: '#F5E8C7' }}>Taguig Weather Forecast</h1>
       <br />
       {weather.length > 0 ? (

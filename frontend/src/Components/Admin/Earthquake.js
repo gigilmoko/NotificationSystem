@@ -75,7 +75,7 @@ const AdminEarthquake = () => {
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <br></br>
-                        <h1 className="my-6">All Earthquakes</h1>
+                        <h1 className="my-6" style = {{color: '#F5E8C7'}}>All Earthquakes</h1>
                         <MDBDataTable
                             data={earthquakesList()}
                             className="px-3"

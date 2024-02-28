@@ -105,7 +105,7 @@ const AdminHeader = () => {
           data-bs-toggle="dropdown"
         >
           <i className="fa fa-bell me-lg-2" />
-          <span className="d-none d-lg-inline-flex" style = {{ color: '#F5E8C7'}}>Notificatin</span>
+          <span className="d-none d-lg-inline-flex" style = {{ color: '#F5E8C7'}}>Notification</span>
         </a>
         <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
           <a href="#" className="dropdown-item">

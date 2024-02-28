@@ -33,13 +33,8 @@ const Earthquake = () => {
       <Header/>
         <div className="table-container">
         <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+      
+      
         
           <h1 style = {{ color: '#F5E8C7'}}>Notification Earthquake Data in Philippines</h1>
           <br/>

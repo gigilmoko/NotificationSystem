@@ -36,6 +36,8 @@ const AdminWeather = () => {
                     label: 'Date',
                     field: 'date',
                     sort: 'asc',
+                    
+                    
                 },
                 {
                     label: 'Time',
@@ -100,6 +102,7 @@ const AdminWeather = () => {
     return (
         <Fragment>
            <div class = "custom-container" style = {{ backgroundColor: '#001F3F', height: '100%', width: '100%', overflow: 'hidden'}}>
+            
                  <div className="row">
                 
                 <div className="col-12 col-md-2">
@@ -111,13 +114,14 @@ const AdminWeather = () => {
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <br></br>
-                        <h1 className="my-6">Weather Lists</h1>
+                        <h1 className="my-6" style = {{color: '#F5E8C7'}}>Weather Lists</h1>
                         <MDBDataTable
                             data={weatherList()}
                             className="px-3"
                             bordered
                             striped
                             hover
+                            theadStyle={{ backgroundColor: '#323C50', color: '#F5E8C7' }}
                         />
                     </Fragment>
                 </div>

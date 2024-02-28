@@ -142,9 +142,9 @@ const about = () => {
                       </a>
                     </div>
               </div>
-              <div className="guide-title text-center rounded-bottom p-4">
+              <div className="guide-title text-center rounded-bottom p-4" style = {{backgroundColor: '#323C50'}}>
                 <div className="guide-title-inner">
-                  <h4 className="mt-3" style = {{ fontSize: '20px'}}>Emmanuel Cleto Francisco</h4>
+                  <h4 className="mt-3" style = {{ fontSize: '20px', color: '#F5E8C7'}}>Emmanuel Cleto Francisco</h4>
                   <p className="mb-0">Designation</p>
                 </div>
               </div>
@@ -188,9 +188,9 @@ const about = () => {
                   </a>
                 </div>
               </div>
-              <div className="guide-title text-center rounded-bottom p-4">
+              <div className="guide-title text-center rounded-bottom p-4" style = {{backgroundColor: '#323C50'}}>
                 <div className="guide-title-inner">
-                <h4 className="mt-3" style = {{ fontSize: '20px'}}>Alyssandra Ivy Lazaro</h4>
+                <h4 className="mt-3" style = {{ fontSize: '20px', color: '#F5E8C7' }}>Alyssandra Ivy Lazaro</h4>
                   <p className="mb-0">Designation</p>
                 </div>
               </div>
@@ -234,9 +234,9 @@ const about = () => {
                   </a>
                 </div>
               </div>
-              <div className="guide-title text-center rounded-bottom p-4">
+              <div className="guide-title text-center rounded-bottom p-4" style = {{backgroundColor: '#323C50'}}>
                 <div className="guide-title-inner">
-                <h4 className="mt-3" style = {{ fontSize: '20px'}}>Jiselle Gregori</h4>
+                <h4 className="mt-3" style = {{ fontSize: '20px', color: '#F5E8C7'}} >Jiselle Gregori</h4>
                   <p className="mb-0">Designation</p>
                 </div>
               </div>
@@ -280,9 +280,9 @@ const about = () => {
                   </a>
                 </div>
               </div>
-              <div className="guide-title text-center rounded-bottom p-4">
+              <div className="guide-title text-center rounded-bottom p-4" style = {{backgroundColor: '#323C50'}}>
                 <div className="guide-title-inner">
-                <h4 className="mt-3" style = {{ fontSize: '20px'}}>Von Voltaire Pagsiat</h4>
+                <h4 className="mt-3" style = {{ fontSize: '20px', color: '#F5E8C7'}} >Von Voltaire Pagsiat</h4>
                   <p className="mb-0">Designation</p>
                 </div>
               </div>
