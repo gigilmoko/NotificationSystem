@@ -29,9 +29,9 @@ Earthquake
 <i className="fa fa-keyboard me-2" />
 Weather
 </a>
-<a href="table.html" className="nav-item nav-link" style = {{ color: '#F5E8C7'}}>
+<a href="/admin/dashboard/adminUser" className="nav-item nav-link" style = {{ color: '#F5E8C7'}}>
 <i className="fa fa-table me-2" />
-Tables
+Users
 </a>
 <a href="chart.html" className="nav-item nav-link" style = {{ color: '#F5E8C7'}}>
 <i className="fa fa-chart-bar me-2" />

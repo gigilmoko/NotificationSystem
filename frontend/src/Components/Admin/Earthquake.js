@@ -16,7 +16,7 @@ const AdminEarthquake = () => {
                     'Authorization': `Bearer ${getToken()}`
                 }
             };
-            const { data } = await axios.get(`${process.env.REACT_APP_API}/usgs/getEarthquakes`, config);
+            const { data } = await axios.get(`${process.env.REACT_APP_API}/api/getEarthquakes`, config);
             console.log(data);
             setEarthquakes(data.earthquakes);
         } catch (error) {

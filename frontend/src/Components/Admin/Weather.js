@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import Sidebar from '../Layout/AdminSidebar.js'
+import Sidebar from '../Layout/AdminSidebar'
 import Header from '../Layout/header'
 import axios from 'axios'
 import { getToken } from "../../utils/helpers";
