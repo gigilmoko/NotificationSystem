@@ -98,14 +98,14 @@ const AdminHeader = () => {
           </a>
         </div>
       </div>
-      <div className="nav-item dropdown">
+      <div className="nav-item dropdown" style = {{ color: '#F5E8C7'}}>
         <a
           href="#"
           className="nav-link dropdown-toggle"
           data-bs-toggle="dropdown"
         >
           <i className="fa fa-bell me-lg-2" />
-          <span className="d-none d-lg-inline-flex">Notificatin</span>
+          <span className="d-none d-lg-inline-flex" style = {{ color: '#F5E8C7'}}>Notificatin</span>
         </a>
         <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
           <a href="#" className="dropdown-item">
@@ -128,7 +128,7 @@ const AdminHeader = () => {
           </a>
         </div>
       </div>
-      <div className="nav-item dropdown">
+      <div className="nav-item dropdown" style = {{ color: '#F5E8C7'}}>
         <a
           href="#"
           className="nav-link dropdown-toggle"
@@ -140,16 +140,16 @@ const AdminHeader = () => {
             alt=""
             style={{ width: 40, height: 40 }}
           />
-          <span className="d-none d-lg-inline-flex">{user.name}</span>
+          <span className="d-none d-lg-inline-flex" style = {{ color: '#F5E8C7'}}>{user.name}</span>
         </a>
         <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-          <a href="/profile" className="dropdown-item">
+          <a href="/profile" className="dropdown-item" style = {{ color: '#F5E8C7'}}>
             My Profile
           </a>
-          <a href="#" className="dropdown-item">
+          <a href="#" className="dropdown-item" style = {{ color: '#F5E8C7'}}>
             Settings
           </a>
-          <a href="#" className="dropdown-item" onClick={logoutHandler}>
+          <a href="#" className="dropdown-item" onClick={logoutHandler}  style = {{ color: '#F5E8C7'}}>
             Log Out
           </a>
         </div>

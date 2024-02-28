@@ -86,7 +86,7 @@ useEffect(() => {
           }
         `}
       </style>
-      <div className = "header-container">
+      <div className = "header-container" style = {{}}> 
       <header id="header" className="content-light">
         <div className="header-wrap container py-3" style = {{height: '300px'}}>
           <div className="row align-items-center">

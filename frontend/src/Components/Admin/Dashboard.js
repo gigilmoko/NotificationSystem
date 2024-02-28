@@ -50,7 +50,7 @@ const Dashboard = () => {
   
   return (
     
-    <div class = "custom-container">
+    <div class = "custom-container" style = {{ backgroundColor: '#001F3F'}}>
       <Helmeth/>
     <div className="container-fluid position-relative d-flex p-0">
       {/* Spinner Start */}
@@ -111,9 +111,9 @@ const Dashboard = () => {
         <div className="container-fluid pt-4 px-4">
           <div className="row g-4">
             <div className="col-sm-12 col-xl-6">
-              <div className="bg-secondary text-center rounded p-4" style = {{height: '550px'}}>
+              <div className="bg-secondary text-center rounded p-4" style = {{height: '550px', backgroundColor: '#323C50'}}>
                 <div className="d-flex align-items-center justify-content-between mb-4">
-                  <h6 className="mb-0">Daily Forecasts</h6>
+                  <h6 className="mb-0" style = {{ color: '#F5E8C7'}}>Daily Forecasts</h6>
                 </div>
                 <div className="d-flex justify-content-between mb-4">
                   {[1, 2, 3, 4, 5].map((day) => (
@@ -128,7 +128,7 @@ const Dashboard = () => {
             <div className="col-sm-12 col-xl-6">
               <div className="bg-secondary text-center rounded p-4" style = {{height: '550px'}}>
                 <div className="d-flex align-items-center justify-content-between mb-4">
-                  <h6 className="mb-0">Heat Index</h6>
+                  <h6 className="mb-0" style = {{ color: '#F5E8C7'}}>Heat Index</h6>
                 </div>
                 <div className="d-flex justify-content-between mb-4">
                   <button onClick={() => setSelectedChart('hourly')} className={`btn ${selectedChart === 'hourly' ? 'btn-warning' : 'btn-secondary'}`}>
@@ -147,7 +147,7 @@ const Dashboard = () => {
             <div className="table-responsive">
               <div className="bg-secondary text-center rounded p-4">
                 <div className="d-flex align-items-center justify-content-between mb-4">
-                  <h6 className="mb-0">Earthquake Data</h6>
+                  <h6 className="mb-0" style = {{ color: '#F5E8C7'}}>Earthquake Data</h6>
                 </div>
                 <EarthquakeChart />
               </div>

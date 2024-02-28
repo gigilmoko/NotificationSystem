@@ -55,7 +55,7 @@ function Chart1() {
             <header className="App-header">
                 {Object.keys(groupedData).map((date) => (
                     <div key={date}>
-                        <h3>{`${date}`}</h3>
+                        <h3 style = {{ color: '#F5E8C7'}}>{`${date}`}</h3>
                         <ResponsiveContainer width="100%" height={300}>
                             <LineChart data={groupedData[date]}>
                                 <CartesianGrid strokeDasharray="3 3" />
