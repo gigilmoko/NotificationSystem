@@ -137,8 +137,6 @@ const WeatherUi = () => {
         console.error('Error fetching forecast data:', error);
       }
     };
-
-    // Fetch current weather and forecast data on component mount
     fetchCurrentWeather();
     fetchForecastData();
   }, [currentDate]);

@@ -128,72 +128,72 @@ useEffect(() => {
                       </a>
                     </li>
                     <li>
-                      <a href="/weather" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
+                      <a href="/weatherUi" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
                         Weather
                       </a>
                     </li>
                     <li>
                     {user ? (
-  <div className="menu-itemhome1 dropdown">
-    <button
-      className="btn text-white mr-4"
-      type="button"
-      id="dropDownMenuButton"
-      aria-haspopup="true"
-      aria-expanded="false"
-      style={{ color: '#b08ead', backgroundColor: 'transparent', border: 'none' }}
-    >
-      {user.avatar && ( // Check if avatar URL is present
-        <figure className="avatar avatar-nav">
-          <img
-            src={user.avatar} // Use user.avatar directly as the src attribute
-            alt={`${user.name}'s Avatar`}
-            className="rounded-circle"
-            style = {{ height: '50px', width: '50px'}}
-          />
-        </figure>
-        
-      )}
-      
-      <label style={{ color: '#F5E8C7' }}>{user && user.name}</label>
-    </button>
+                    <div className="menu-itemhome1 dropdown">
+                      <button
+                        className="btn text-white mr-4"
+                        type="button"
+                        id="dropDownMenuButton"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        style={{ color: '#b08ead', backgroundColor: 'transparent', border: 'none' }}
+                      >
+                        {user.avatar && ( // Check if avatar URL is present
+                          <figure className="avatar avatar-nav">
+                            <img
+                              src={user.avatar} // Use user.avatar directly as the src attribute
+                              alt={`${user.name}'s Avatar`}
+                              className="rounded-circle"
+                              style = {{ height: '50px', width: '50px'}}
+                            />
+                          </figure>
+                          
+                        )}
+                        
+                        <label style={{ color: '#F5E8C7' }}>{user && user.name}</label>
+                      </button>
 
-      <div
-    className="dropdown-menu dropdown-menu-right"
-    aria-labelledby="dropDownMenuButton"
-    style={{ maxHeight: '300px', overflowY: 'auto' }} // Adjusted maxHeight and overflowY
-  >
-    {user && user.role === 'admin' && (
-      <Link
-        className="dropdown-item"
-        to="/admin/dashboard"
-        style = {{color: '#F5E8C7'}}
-      >
-        Dashboard
-      </Link>
-    )}
-  
-    <Link className="dropdown-item"  style = {{color: '#F5E8C7'}} to="/profile">
-      Profile
-    </Link>
-    <Link
-      className="dropdown-item text-danger"
-     
-      onClick={logoutHandler}
-      to="/"
-      data-toggle="modal"
-      data-target="#logoutModal"
+                        <div
+                      className="dropdown-menu dropdown-menu-right"
+                      aria-labelledby="dropDownMenuButton"
+                      style={{ maxHeight: '300px', overflowY: 'auto' }} // Adjusted maxHeight and overflowY
+                    >
+                      {user && user.role === 'admin' && (
+                        <Link
+                          className="dropdown-item"
+                          to="/admin/dashboard"
+                          style = {{color: '#F5E8C7'}}
+                        >
+                          Dashboard
+                        </Link>
+                      )}
+                    
+                      <Link className="dropdown-item"  style = {{color: '#F5E8C7'}} to="/profile">
+                        Profile
+                      </Link>
+                      <Link
+                        className="dropdown-item text-danger"
+                      
+                        onClick={logoutHandler}
+                        to="/"
+                        data-toggle="modal"
+                        data-target="#logoutModal"
 
-    >
-      Logout
-    </Link>
-  </div>
-    </div>
-  ) : (
-    <a href="/login" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
-    Login
-  </a>
-  )}
+                      >
+                        Logout
+                      </Link>
+                    </div>
+                    </div>
+                    ) : (
+                      <a href="/login" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
+                      Login
+                    </a>
+                    )}
 
 
                     </li>
