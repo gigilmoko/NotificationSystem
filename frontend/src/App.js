@@ -34,6 +34,12 @@ function App() {
     <div className="App">
         <BrowserRouter>
           <Routes>
+
+            <Route path = "/login" element = { <Login/> } /> 
+            <Route path = "/register" element = { <Register/> } /> 
+            <Route path = "/profile" element = { <Profile/> } />
+
+            
             <Route path ="/admin/dashboard" element = {<ProtectedRoute isAdmin={true}><Dashboard /></ProtectedRoute> }/>
             <Route path="/admin/dashboard/adminEarthquake" element = { <ProtectedRoute isAdmin={true}><AdminEarthquake /></ProtectedRoute>}/>
             <Route path="/admin/dashboard/adminWeather" element={ <ProtectedRoute isAdmin={true}> <AdminWeather /> </ProtectedRoute>}/>

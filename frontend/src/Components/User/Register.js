@@ -41,16 +41,20 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const { name, email, password, avatar } = formData;
-
+  
+    // Log the email and password provided by the user
+    console.log("Email:", email);
+    console.log("Password:", password);
+  
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("name", name);
       formDataToSend.append("email", email);
       formDataToSend.append("password", password);
       formDataToSend.append("avatar", avatar);
-
+  
       await axios.post(
         // `${process.env.REACT_APP_API}/api/v1/register`,
         'http://localhost:4001/api/register',
@@ -61,7 +65,7 @@ export default function Register() {
           },
         }
       );
-
+  
       console.log("user registered");
       navigate("/");
     } catch (error) {

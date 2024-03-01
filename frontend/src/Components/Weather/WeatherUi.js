@@ -163,11 +163,11 @@ const WeatherUi = () => {
                         <h2 className="display-2">
                           <strong style={{ color: 'black' }}>{currentWeather.temp}°C</strong>
                         </h2>
-                        <p className="text-muted mb-0" style={{ marginTop: '-150px' }}>Wind Speed: {currentWeather.windSpeed} m/s
+                        <p className="text-muted mb-0" style={{ marginTop: '-150px' }}><i class="fa-solid fa-wind"></i>Wind Speed: {currentWeather.windSpeed} m/s
                         </p>
                         <p className="text-muted mb-0" style={{ marginTop: '0px' }}>Precipitation: {currentWeather.precipitation} mm/h
                         </p>
-                        <p className="text-muted mb-0" style={{ marginTop: '0px' }}>Humidity: {currentWeather.humidity}%
+                        <p className="text-muted mb-0" style={{ marginTop: '0px' }}><i class="fas fa-humidity"></i>Humidity: {currentWeather.humidity}%
                         </p>
                         <p className="text-muted mb-0" style={{ marginTop: '0px' }}>
                           <strong>Taguig, Philippines</strong>

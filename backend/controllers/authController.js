@@ -8,33 +8,32 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 exports.registerUser = async (req, res, next) => {
-    const { name, email, password } = req.body;
-    const hashedPassword = bcryptjs.hashSync(password, 12);
+  const { name, email, password } = req.body;
 
-    try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-        return res.status(400).json({ error: "Email is already taken" });
-        }
+  try {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+          return res.status(400).json({ error: "Email is already taken" });
+      }
 
-        let avatarUrl;
-        if (req.file) {
-        const result = await cloudinary.uploader.upload(req.file.path);
-        avatarUrl = result.secure_url;
-        }
+      let avatarUrl;
+      if (req.file) {
+          const result = await cloudinary.uploader.upload(req.file.path);
+          avatarUrl = result.secure_url;
+      }
 
-        const newUser = new User({
-        name,
-        email, 
-        password: hashedPassword,
-        avatar: avatarUrl
-        });
-        await newUser.save();
+      const newUser = new User({
+          name,
+          email, 
+          password, // Store the password as plain text
+          avatar: avatarUrl
+      });
+      await newUser.save();
 
-        res.status(201).json("Successfully created a User");
-    } catch (error) {
-        next(error);
-    }
+      res.status(201).json("Successfully created a User");
+  } catch (error) {
+      next(error);
+  }
 };
 
 exports.loginUser = async (req, res, next) => {
