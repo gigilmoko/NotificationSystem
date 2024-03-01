@@ -1,12 +1,66 @@
-
 const axios = require('axios');
 const WeatherData = require('../models/weather');
 const HeatIndex = require('../models/heat').HeatIndex;
 const cron = require('node-cron');
-// const { createHeatAlert } = require('../controllers/reportController')
 const { io } = require('../server');
+const { createHeatAlert } = require('../controllers/heatAlertController');
 
-async function fetchAndSaveWeatherData(cityName, apiKey) {
+const calculateHeatIndex = (temperatureCelsius, humidity) => {
+    const temperatureFahrenheit = (temperatureCelsius * 9/5) + 32;
+
+    const heatIndexFahrenheit = -42.379 +
+        2.04901523 * temperatureFahrenheit +
+        10.14333127 * humidity -
+        0.22475541 * temperatureFahrenheit * humidity -
+        6.83783e-03 * temperatureFahrenheit * temperatureFahrenheit -
+        5.481717e-02 * humidity * humidity +
+        1.22874e-03 * temperatureFahrenheit * temperatureFahrenheit * humidity +
+        8.5282e-04 * temperatureFahrenheit * humidity * humidity -
+        1.99e-06 * temperatureFahrenheit * temperatureFahrenheit * humidity * humidity;
+
+    const heatIndexCelsius = (heatIndexFahrenheit - 32) * 5/9;
+
+    return heatIndexCelsius;
+};
+
+const checkTropicalCycloneSignal = (weatherData) => {
+    if (weatherData.windSpeed >= 39 && weatherData.windSpeed <= 61) {
+        return 'Tropical Cyclone Wind Signal #1';
+    } else if (weatherData.windSpeed >= 62 && weatherData.windSpeed <= 88) {
+        return 'Tropical Cyclone Wind Signal #2';
+    } else if (weatherData.windSpeed >= 89 && weatherData.windSpeed <= 117) {
+        return 'Tropical Cyclone Wind Signal #3';
+    } else if (weatherData.windSpeed >= 118 && weatherData.windSpeed <= 184) {
+        return 'Tropical Cyclone Wind Signal #4';
+    } else if (weatherData.windSpeed >= 185) {
+        return 'Tropical Cyclone Wind Signal #5';
+    } else {
+        return 'Normal Weather Today';
+    }
+};
+
+const checkHeatIndexCategory = (heatIndex) => {
+    const heatIndexNumber = parseFloat(heatIndex);
+
+    if (!isNaN(heatIndexNumber)) {
+        if (heatIndexNumber >= 27 && heatIndexNumber < 32) {
+            return 'Caution';
+        } else if (heatIndexNumber >= 32 && heatIndexNumber < 39) {
+            return 'Extreme Caution';
+        } else if (heatIndexNumber >= 39 && heatIndexNumber < 51) {
+            return 'Danger';
+        } else if (heatIndexNumber >= 51) {
+            return 'Extreme Danger';
+        } else {
+            return 'Normal Heat Index Today';
+        }
+    } else {
+        console.error('Invalid heatIndex value:', heatIndex);
+        throw new Error('Error fetching and saving weather data');
+    }
+};
+
+const fetchAndSaveWeatherData = async (cityName, apiKey) => {
     try {
         const apiKey = process.env.OPENWEATHERMAP_API_KEY;
         const apiURL = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
@@ -58,9 +112,9 @@ async function fetchAndSaveWeatherData(cityName, apiKey) {
         console.error('Error fetching and saving weather data:', error.message);
         throw new Error('Error fetching and saving weather data');
     }
-}
+};
 
-async function searchWeatherData(cityName) {
+const searchWeatherData = async (cityName) => {
     try {
         const data = await WeatherData.find({ city: new RegExp(cityName, 'i') }).sort({ timestamp: -1 }).exec();
         return data;
@@ -68,41 +122,7 @@ async function searchWeatherData(cityName) {
         console.error('Error searching weather data:', error.message);
         throw new Error('Error searching weather data');
     }
-}
-
-function calculateHeatIndex(temperatureCelsius, humidity) {
-    const temperatureFahrenheit = (temperatureCelsius * 9/5) + 32;
-
-    const heatIndexFahrenheit = -42.379 +
-        2.04901523 * temperatureFahrenheit +
-        10.14333127 * humidity -
-        0.22475541 * temperatureFahrenheit * humidity -
-        6.83783e-03 * temperatureFahrenheit * temperatureFahrenheit -
-        5.481717e-02 * humidity * humidity +
-        1.22874e-03 * temperatureFahrenheit * temperatureFahrenheit * humidity +
-        8.5282e-04 * temperatureFahrenheit * humidity * humidity -
-        1.99e-06 * temperatureFahrenheit * temperatureFahrenheit * humidity * humidity;
-
-    const heatIndexCelsius = (heatIndexFahrenheit - 32) * 5/9;
-
-    return heatIndexCelsius;
-}
-
-function checkTropicalCycloneSignal(weatherData) {
-    if (weatherData.windSpeed >= 39 && weatherData.windSpeed <= 61) {
-        return 'Tropical Cyclone Wind Signal #1';
-    } else if (weatherData.windSpeed >= 62 && weatherData.windSpeed <= 88) {
-        return 'Tropical Cyclone Wind Signal #2';
-    } else if (weatherData.windSpeed >= 89 && weatherData.windSpeed <= 117) {
-        return 'Tropical Cyclone Wind Signal #3';
-    } else if (weatherData.windSpeed >= 118 && weatherData.windSpeed <= 184) {
-        return 'Tropical Cyclone Wind Signal #4';
-    } else if (weatherData.windSpeed >= 185) {
-        return 'Tropical Cyclone Wind Signal #5';
-    } else {
-        return 'Normal Weather Today';
-    }
-}
+};
 
 const getWeather = async (req, res, next) => {
     try {
@@ -134,9 +154,12 @@ const saveHeatIndex = async (weatherCityName, weatherApiKey) => {
         const temperatureCelsius = (weatherData.main.temp - 273.15).toFixed(2);
         const humidity = weatherData.main.humidity.toFixed(2);
         const heatIndexValue = calculateHeatIndex(parseFloat(temperatureCelsius), parseFloat(humidity));
+
+        // Call the function to create heat alert
+        await createHeatAlert(heatIndexValue);
+
         const heatIndexCategory = checkHeatIndexCategory(heatIndexValue);
 
-        // Save the heat index only if it's "Caution" and above
         if (heatIndexCategory !== 'Normal Heat Index Today') {
             const newHeatIndex = new HeatIndex({
                 heatIndex: heatIndexValue.toFixed(2),
@@ -145,39 +168,12 @@ const saveHeatIndex = async (weatherCityName, weatherApiKey) => {
 
             await newHeatIndex.save();
             console.log('Heat Index saved:', newHeatIndex);
-
-            // Check if the heat index is higher than caution, then create a heat alert
-            if (heatIndexCategory !== 'Caution') {
-                await createHeatAlert(newHeatIndex._id, heatIndexCategory, `Details based on ${heatIndexCategory}`);
-            }
         }
-
     } catch (error) {
         console.error('Error saving heat index:', error.message);
         throw new Error('Error saving heat index');
     }
 };
-
-function checkHeatIndexCategory(heatIndex) {
-    const heatIndexNumber = parseFloat(heatIndex);
-
-    if (!isNaN(heatIndexNumber)) {
-        if (heatIndexNumber >= 27 && heatIndexNumber < 32) {
-            return 'Caution';
-        } else if (heatIndexNumber >= 32 && heatIndexNumber < 39) {
-            return 'Extreme Caution';
-        } else if (heatIndexNumber >= 39 && heatIndexNumber < 51) {
-            return 'Danger';
-        } else if (heatIndexNumber >= 51) {
-            return 'Extreme Danger';
-        } else {
-            return 'Normal Heat Index Today';
-        }
-    } else {
-        console.error('Invalid heatIndex value:', heatIndex);
-        throw new Error('Error fetching and saving weather data');
-    }
-}
 
 const startCronJobsWeather = (io) => {
     cron.schedule('*/20 * * * *', async () => {
@@ -186,11 +182,9 @@ const startCronJobsWeather = (io) => {
         
         // Call the function to save the heat index
         await saveHeatIndex(weatherCityName, weatherApiKey, io);
-
         await fetchAndSaveWeatherData(weatherCityName, weatherApiKey);
     });
 };
-
 
 const getWeeklyAverageHeatIndex = async (req, res, next) => {
     try {
@@ -334,16 +328,16 @@ const getHourlyAverageHeatIndex = async (req, res, next) => {
     }
 };
 
+module.exports = { 
+    fetchAndSaveWeatherData, 
+    searchWeatherData, 
+    calculateHeatIndex, 
+    checkTropicalCycloneSignal, 
+    startCronJobsWeather, 
+    getWeather, 
+    saveHeatIndex, 
+    checkHeatIndexCategory, 
+    getWeeklyAverageHeatIndex,
+    getHourlyAverageHeatIndex 
+};
 
-
-module.exports = { fetchAndSaveWeatherData, 
-                searchWeatherData, 
-                calculateHeatIndex, 
-                checkTropicalCycloneSignal, 
-                startCronJobsWeather, 
-                getWeather, 
-                saveHeatIndex, 
-                checkHeatIndexCategory, 
-                getWeeklyAverageHeatIndex,
-                getHourlyAverageHeatIndex 
-            };

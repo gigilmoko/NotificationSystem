@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
 require('dotenv').config({ path: './config/config.env' });
-// const User = mongoose.model("User", userSchema);
 
 const userSchema = new mongoose.Schema(
   {
