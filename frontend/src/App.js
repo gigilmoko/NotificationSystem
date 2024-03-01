@@ -27,6 +27,7 @@ import ProtectedRoute from './Components/Route/ProtectedRoute';
 import EarthquakeChart from './Components/Charts/Earthquake';
 import AdminUsers from './Components/Admin/Users';
 import WeatherUi from './Components/Weather/WeatherUi'
+import UserHeatAlert from './Components/User/HeatReport';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
 
             <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
             <Route path ="/userForecast" element = {<WeatherApp/>} />
+            <Route path ="/userHeatAlert" element = {<UserHeatAlert/>} />
             
 
             {/* ----Home---- */}
