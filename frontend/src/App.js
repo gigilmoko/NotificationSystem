@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import io from 'socket.io-client';
 
 import EarthquakeSite from './Components/Earthquake/earthquake'
 import WeatherSite from './Components/Weather/weather'
@@ -28,14 +29,32 @@ import AdminUsers from './Components/Admin/Users';
 import WeatherUi from './Components/Weather/WeatherUi'
 import UserHeatAlert from './Components/User/HeatReport';
 import UpdateProfile from './Components/User/UpdateProfile'
+import ToastAlert from './Components/User/ToastAlert';
+
+
+const socket = io('http://localhost:4001');
+
+const AlertListener = () => {
+  useEffect(() => {
+    socket.on('newHeatAlert', (newAlert) => {
+      console.log('New Heat Alert:', newAlert);
+      toast.success('New Heat Alert received!');
+    });
+    return () => {
+      socket.off('newHeatAlert');
+    };
+  }, []);
+
+  return null;
+};
+
 function App() {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [newAlert, setNewAlert] = useState(null);
 
   return (
     <div className="App">
         <BrowserRouter>
-          {/* <ToastContainer> */}
           <Routes>
             <Route path = "/login" element = { <Login/> } /> 
             <Route path = "/register" element = { <Register/> } /> 
@@ -56,8 +75,8 @@ function App() {
 
             <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
             <Route path ="/userForecast" element = {<WeatherApp/>} />
-            <Route path="/userNotif" element={<UserHeatAlert onNewAlert={(alert) => setNewAlert(alert)} />} />
-
+            {/* <Route path="/userNotif" element={<UserHeatAlert onNewAlert={(alert) => setNewAlert(alert)} />} /> */}
+            <Route path="/userNotif" element={ <ProtectedRoute isAdmin={false}> <UserHeatAlert /> </ProtectedRoute> } />
             {/* ----Home---- */}
             <Route path = "/" element = { <NewHome/> } /> 
             <Route path ="/earthquake" element = {<EarthquakeSite/>} />
@@ -73,7 +92,8 @@ function App() {
 
           </Routes>
           {!isAdmin && <ToastAlert newAlert={newAlert} />}
-          {/* </ToastContainer> */}
+          <AlertListener />
+          <ToastContainer />
           </BrowserRouter>
     </div>
   );
