@@ -253,40 +253,73 @@ exports.updatePassword = async (req, res, next) => {
 
 //Needs Frontend
 exports.updateProfile = async (req, res, next) => {
+  try {
     const newUserData = {
       name: req.body.name,
-      email: req.body.email,
+      email: req.body.email
     };
-  
-    if (req.body.avatar !== "") {
+
+    if (req.files && req.files.avatar) {
       const user = await User.findById(req.user.id);
-  
-      const image_id = user.avatar.public_id;
-      const res = await cloudinary.v2.uploader.destroy(image_id);
-  
-      const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: "avatars",
-        width: 150,
-        crop: "scale",
-      });
-  
-      newUserData.avatar = {
-        public_id: result.public_id,
-        url: result.secure_url,
-      };
+
+      if (Array.isArray(req.files.avatar)) {
+        const uploadedAvatars = [];
+        for (const file of req.files.avatar) {
+          const result = await cloudinary.v2.uploader.upload(file.path, {
+            folder: 'avatars',
+            width: 150,
+            crop: 'scale'
+          });
+
+          uploadedAvatars.push({
+            public_id: result.public_id,
+            url: result.secure_url
+          });
+        }
+        newUserData.avatar = uploadedAvatars;
+
+        // Delete previous avatars from Cloudinary
+        if (user.avatar && user.avatar.length > 0) {
+          for (const avatar of user.avatar) {
+            await cloudinary.v2.uploader.destroy(avatar.public_id);
+          }
+        }
+      } else {
+        const result = await cloudinary.v2.uploader.upload(req.files.avatar.path, {
+          folder: 'avatars',
+          width: 150,
+          crop: 'scale'
+        });
+
+        newUserData.avatar = [{
+          public_id: result.public_id,
+          url: result.secure_url
+        }];
+
+        // Delete the previous avatar from Cloudinary
+        if (user.avatar && user.avatar.length > 0) {
+          await cloudinary.v2.uploader.destroy(user.avatar[0].public_id);
+        }
+      }
     }
-  
-    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, newUserData, {
       new: true,
       runValidators: true,
     });
-    if (!user) {
-      return res.status(401).json({ message: "User Not Updated" });
+
+    if (!updatedUser) {
+      return res.status(401).json({ success: false, message: 'User Not Updated' });
     }
-  
+
     res.status(200).json({
       success: true,
+      user: updatedUser
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
 };
 
 exports.checkEmail = async (req, res, next) => {

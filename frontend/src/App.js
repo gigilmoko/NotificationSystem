@@ -28,7 +28,7 @@ import EarthquakeChart from './Components/Charts/Earthquake';
 import AdminUsers from './Components/Admin/Users';
 import WeatherUi from './Components/Weather/WeatherUi'
 import UserHeatAlert from './Components/User/HeatReport';
-
+import UpdateProfile from './Components/User/UpdateProfile'
 function App() {
 
   return (
@@ -69,6 +69,7 @@ function App() {
             <Route path = "/login" element = { <Login/> } /> 
             <Route path = "/register" element = { <Register/> } /> 
             <Route path = "/profile" element = { <Profile/> } />
+            <Route path = '/profile/update' element = { <UpdateProfile/> }/>
 
           </Routes>
           </BrowserRouter>

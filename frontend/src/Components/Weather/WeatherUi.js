@@ -165,7 +165,7 @@ const WeatherUi = () => {
                         </h2>
                         <p className="text-muted mb-0" style={{ marginTop: '-150px' }}><i class="fa-solid fa-wind"></i>Wind Speed: {currentWeather.windSpeed} m/s
                         </p>
-                        <p className="text-muted mb-0" style={{ marginTop: '0px' }}>Precipitation: {currentWeather.precipitation} mm/h
+                        <p className="text-muted mb-0" style={{ marginTop: '0px' }}><i class="fa-solid fa-cloud-rain"></i>Precipitation: {currentWeather.precipitation} mm/h
                         </p>
                         <p className="text-muted mb-0" style={{ marginTop: '0px' }}><i class="fas fa-humidity"></i>Humidity: {currentWeather.humidity}%
                         </p>
