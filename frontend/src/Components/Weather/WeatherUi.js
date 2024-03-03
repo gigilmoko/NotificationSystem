@@ -4,6 +4,7 @@ import axios from 'axios';
 import { WiDaySunny, WiNightClear, WiDayCloudy, WiNightAltCloudy, WiDayCloudyHigh, WiNightAltCloudyHigh, WiDayShowers, WiNightAltShowers, WiDayRain, WiNightAltRain, WiDayThunderstorm, WiNightAltThunderstorm, WiDaySnow, WiNightAltSnow, WiFog } from 'react-icons/wi';
 import Header from '../Layout/header';
 import Footer from '../Layout/footer';
+import humidity from '../../assets/systempics/humidity.png'
 
 const api = {
   key: 'd6536e139981446b8a734cd33ee9b21e',
@@ -161,14 +162,11 @@ const WeatherUi = () => {
                     <div className="d-flex justify-content-between mb-4 pb-2">
                       <div>
                         <h2 className="display-2">
-                          <strong style={{ color: 'black' }}>{currentWeather.temp}°C</strong>
+                          <strong style={{ color: 'black',  }}>{currentWeather.temp}°C</strong>
                         </h2>
-                        <p className="text-muted mb-0" style={{ marginTop: '-150px' }}><i class="fa-solid fa-wind"></i>Wind Speed: {currentWeather.windSpeed} m/s
+                        <p className="text-muted mb-0" style={{ marginTop: '-150px' }}><i class="fa-solid fa-wind"></i> {currentWeather.windSpeed} m/s <i class="fa-solid fa-cloud-rain"></i> {currentWeather.precipitation} mm/h <img src = {humidity} style = {{ width: '15px', height: '15px'}}></img> {currentWeather.humidity}%
                         </p>
-                        <p className="text-muted mb-0" style={{ marginTop: '0px' }}><i class="fa-solid fa-cloud-rain"></i>Precipitation: {currentWeather.precipitation} mm/h
-                        </p>
-                        <p className="text-muted mb-0" style={{ marginTop: '0px' }}><i class="fas fa-humidity"></i>Humidity: {currentWeather.humidity}%
-                        </p>
+                       
                         <p className="text-muted mb-0" style={{ marginTop: '0px' }}>
                           <strong>Taguig, Philippines</strong>
                         </p>

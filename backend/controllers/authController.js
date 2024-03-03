@@ -262,44 +262,17 @@ exports.updateProfile = async (req, res, next) => {
     if (req.files && req.files.avatar) {
       const user = await User.findById(req.user.id);
 
-      if (Array.isArray(req.files.avatar)) {
-        const uploadedAvatars = [];
-        for (const file of req.files.avatar) {
-          const result = await cloudinary.v2.uploader.upload(file.path, {
-            folder: 'avatars',
-            width: 150,
-            crop: 'scale'
-          });
+      const uploadedAvatar = await cloudinary.v2.uploader.upload(req.files.avatar.path, {
+        folder: 'avatars',
+        width: 150,
+        crop: 'scale'
+      });
 
-          uploadedAvatars.push({
-            public_id: result.public_id,
-            url: result.secure_url
-          });
-        }
-        newUserData.avatar = uploadedAvatars;
+      newUserData.avatar = uploadedAvatar.secure_url;
 
-        // Delete previous avatars from Cloudinary
-        if (user.avatar && user.avatar.length > 0) {
-          for (const avatar of user.avatar) {
-            await cloudinary.v2.uploader.destroy(avatar.public_id);
-          }
-        }
-      } else {
-        const result = await cloudinary.v2.uploader.upload(req.files.avatar.path, {
-          folder: 'avatars',
-          width: 150,
-          crop: 'scale'
-        });
-
-        newUserData.avatar = [{
-          public_id: result.public_id,
-          url: result.secure_url
-        }];
-
-        // Delete the previous avatar from Cloudinary
-        if (user.avatar && user.avatar.length > 0) {
-          await cloudinary.v2.uploader.destroy(user.avatar[0].public_id);
-        }
+      // Delete the previous avatar from Cloudinary (if exists)
+      if (user.avatar) {
+        await cloudinary.v2.uploader.destroy(user.avatar);
       }
     }
 
@@ -321,6 +294,7 @@ exports.updateProfile = async (req, res, next) => {
     res.status(500).json({ success: false, message: 'Server Error' });
   }
 };
+
 
 exports.checkEmail = async (req, res, next) => {
     try {

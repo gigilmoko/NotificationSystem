@@ -48,13 +48,18 @@ const UpdateProfile = () => {
   const updateProfile = async (userData) => {
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        // 'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${getToken()}`
       }
     };
     try {
       const { data } = await axios.put(`${process.env.REACT_APP_API}/api/me/update`, userData, config);
+      console.log('Update response:', data); // Log the response data
       setIsUpdated(data.success);
+  
+      // Update avatarPreview with the new avatar URL
+      setAvatarPreview([data.user.avatar]);
+  
       setLoading(false);
       toast.success('User updated', {
         position: toast.POSITION.BOTTOM_RIGHT
@@ -83,21 +88,21 @@ const UpdateProfile = () => {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('email', email);
-
-    avatars.forEach((file, index) => {
-      formData.append('avatar', file); // Ensure 'avatar' matches the Multer field name
-    });
-
+  
+    // Append the avatar file if exists
+    if (avatars.length > 0) {
+      formData.append('avatar', avatars[0]);
+    }
+  
     await updateProfile(formData);
   };
-
-
+  
   const onChange = (e) => {
     if (e.target.name === 'avatar') {
       const files = e.target.files;
       const previews = [];
       const avatarArray = [];
-  
+    
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onload = () => {
@@ -109,15 +114,15 @@ const UpdateProfile = () => {
           }
         };
         reader.readAsDataURL(files[i]);
-  
+    
         avatarArray.push(files[i]);
       }
-  
+    
       setAvatars(avatarArray);
-    } else {
-  
     }
   };
+  
+  
   console.log(user);
 
   return (
@@ -153,7 +158,7 @@ const UpdateProfile = () => {
                 id='customFile'
                 accept='image/*'
                 onChange={onChange}
-                multiple
+              
               />
               <label className='custom-file-label' htmlFor='customFile'>
                 Choose Avatar
