@@ -1,10 +1,12 @@
 const HeatAlert = require('../models/heatAlert');
 const HeatIndex = require('../models/heat').HeatIndex;
-const { io } = require('../server');
 
-const createHeatAlert = async (heatIndexValue) => {
+const createHeatAlert = async (heatIndexValue, io) => {
     try {
-        const heatIndex = await HeatIndex.findOne({ heatIndex: heatIndexValue });
+        const tolerance = 0.01;
+        const heatIndex = await HeatIndex.findOne({
+            heatIndex: { $gte: heatIndexValue - tolerance, $lte: heatIndexValue + tolerance }
+        });
 
         if (heatIndex) {
             let warning = '';
@@ -36,13 +38,9 @@ const createHeatAlert = async (heatIndexValue) => {
                 warning,
                 details,
             });
-
+    
             await newHeatAlert.save();
-            io.emit('heatAlert', {
-                heatIndex: heatIndexValue,
-                warning,
-                details,
-            });
+            io.emit('newHeatAlert', newHeatAlert);
 
             console.log('Heat Alert saved and sent:', newHeatAlert);
         }
@@ -54,7 +52,10 @@ const createHeatAlert = async (heatIndexValue) => {
 
 const getAllHeatAlerts = async (req, res, next) => {
     try {
-        const heatAlerts = await HeatAlert.find().sort({ timestamp: -1 }).exec();
+        const heatAlerts = await HeatAlert.find()
+            .populate('heatIndex') // Use populate to include the referenced HeatIndex details
+            .sort({ timestamp: -1 })
+            .exec();
 
         res.status(200).json({
             success: true,
@@ -68,5 +69,6 @@ const getAllHeatAlerts = async (req, res, next) => {
         });
     }
 };
+
 
 module.exports = { createHeatAlert, getAllHeatAlerts };

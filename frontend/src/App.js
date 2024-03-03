@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import logo from './logo.svg';
-// import './App.css';
-import { BASE_URL } from './apiConfig'; // Import the BASE_URL
 import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import EarthquakeSite from './Components/Earthquake/earthquake'
 import WeatherSite from './Components/Weather/weather'
 import Login from './Components/User/Login'
@@ -30,12 +29,14 @@ import WeatherUi from './Components/Weather/WeatherUi'
 import UserHeatAlert from './Components/User/HeatReport';
 import UpdateProfile from './Components/User/UpdateProfile'
 function App() {
+  const [isAdmin, setIsAdmin] = useState(true);
+  const [newAlert, setNewAlert] = useState(null);
 
   return (
     <div className="App">
         <BrowserRouter>
+          {/* <ToastContainer> */}
           <Routes>
-
             <Route path = "/login" element = { <Login/> } /> 
             <Route path = "/register" element = { <Register/> } /> 
             <Route path = "/profile" element = { <Profile/> } />
@@ -55,8 +56,7 @@ function App() {
 
             <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
             <Route path ="/userForecast" element = {<WeatherApp/>} />
-            <Route path ="/userHeatAlert" element = {<UserHeatAlert/>} />
-            
+            <Route path="/userNotif" element={<UserHeatAlert onNewAlert={(alert) => setNewAlert(alert)} />} />
 
             {/* ----Home---- */}
             <Route path = "/" element = { <NewHome/> } /> 
@@ -72,6 +72,8 @@ function App() {
             <Route path = '/profile/update' element = { <UpdateProfile/> }/>
 
           </Routes>
+          {!isAdmin && <ToastAlert newAlert={newAlert} />}
+          {/* </ToastContainer> */}
           </BrowserRouter>
     </div>
   );

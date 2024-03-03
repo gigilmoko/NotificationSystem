@@ -1,33 +1,26 @@
 import { useState, useEffect } from "react";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Header from '../Layout/header';
 import axios from 'axios';
 import { getToken } from "../../utils/helpers";
 
-const UserHeatAlert = () => {
+const UserHeatAlert = ({ onNewAlert }) => {
     const [heatAlerts, setHeatAlerts] = useState([]);
     const [error, setError] = useState('');
 
     const getHeatAlerts = async () => {
         try {
             const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getToken()}`
-                }
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${getToken()}`
+            }
             };
             const { data } = await axios.get(`${process.env.REACT_APP_API}/api/getHeatAlert`, config);
-            
-            // Compare current heatAlerts with new alerts
-            const newAlerts = data.heatAlerts.filter(newAlert => !heatAlerts.some(existingAlert => existingAlert._id === newAlert._id));
-            
-            if (newAlerts.length > 0) {
-                // Notify users about the new alert
-                toast.success('New heat alert received!');
-            }
-
             setHeatAlerts(data.heatAlerts);
+    
+            if (data.heatAlerts.length > 0) {
+            onNewAlert(data.heatAlerts[0]);
+            }
         } catch (error) {
             setError(error.response.data.message);
         }
@@ -35,7 +28,7 @@ const UserHeatAlert = () => {
 
     useEffect(() => {
         getHeatAlerts();
-    }, []); // Remove heatAlerts from the dependency array
+    }, []);
 
     return (
         <div className="App" style={{ backgroundColor: '#001F3F' }}>
@@ -66,7 +59,6 @@ const UserHeatAlert = () => {
                     </tbody>
                 </table>
             </div>
-            <ToastContainer />
             <br />
             <br />
             <br />
@@ -75,11 +67,6 @@ const UserHeatAlert = () => {
 }
 
 export default UserHeatAlert;
-
-
-
-
-
 
 
 const styles = `

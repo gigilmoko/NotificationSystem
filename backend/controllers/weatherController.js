@@ -2,7 +2,6 @@ const axios = require('axios');
 const WeatherData = require('../models/weather');
 const HeatIndex = require('../models/heat').HeatIndex;
 const cron = require('node-cron');
-const { io } = require('../server');
 const { createHeatAlert } = require('../controllers/heatAlertController');
 
 const calculateHeatIndex = (temperatureCelsius, humidity) => {
@@ -146,7 +145,7 @@ const getWeather = async (req, res, next) => {
     }
 };
 
-const saveHeatIndex = async (weatherCityName, weatherApiKey) => {
+const saveHeatIndex = async (weatherCityName, weatherApiKey, io) => {
     try {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${weatherCityName}&appid=${weatherApiKey}`);
         const weatherData = response.data;
@@ -155,8 +154,7 @@ const saveHeatIndex = async (weatherCityName, weatherApiKey) => {
         const humidity = weatherData.main.humidity.toFixed(2);
         const heatIndexValue = calculateHeatIndex(parseFloat(temperatureCelsius), parseFloat(humidity));
 
-        // Call the function to create heat alert
-        await createHeatAlert(heatIndexValue);
+        await createHeatAlert(heatIndexValue, io);
 
         const heatIndexCategory = checkHeatIndexCategory(heatIndexValue);
 
@@ -175,12 +173,12 @@ const saveHeatIndex = async (weatherCityName, weatherApiKey) => {
     }
 };
 
+
 const startCronJobsWeather = (io) => {
-    cron.schedule('*/20 * * * *', async () => {
+    cron.schedule('0 * * * *', async () => {
         const weatherCityName = 'Taguig';
         const weatherApiKey = 'd6536e139981446b8a734cd33ee9b21e';
-        
-        // Call the function to save the heat index
+
         await saveHeatIndex(weatherCityName, weatherApiKey, io);
         await fetchAndSaveWeatherData(weatherCityName, weatherApiKey);
     });

@@ -5,25 +5,20 @@ const cloudinary = require('cloudinary');
 require('dotenv').config({ path: '../config/config.env' });
 const http = require('http');
 const mongoose = require('mongoose');
-const cron = require('node-cron');
-const { Server } = require('socket.io');
+const { setupIO } = require('./socketSetup');
 
 const usgsRoutes = require('./routes/usgs');
 const weatherRoutes = require('./routes/weatherRoutes');
-const auth = require('./routes/auth');
 const heatAlertRoutes = require('./routes/heatAlert');
+const auth = require('./routes/auth');
+const { startCronJobsAlert } = require('./controllers/heatAlertController');
 const { startCronJobsWeather } = require('./controllers/weatherController');
 const { startCronJobsEarthquake } = require('./controllers/usgsController');
 
 const app = express();
 const PORT = process.env.PORT || 4001;
 const server = http.createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: "http://localhost:4001",
-        methods: ["GET", "POST"]
-    }
-});
+const io = setupIO(server);
 
 const connectedUsers = new Map();
 
@@ -72,8 +67,10 @@ app.use('/api', heatAlertRoutes);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', async () => {
-    startCronJobsEarthquake();
-    startCronJobsWeather();
+    startCronJobsEarthquake(io);
+    startCronJobsWeather(io);
+    // startCronJobsAlert(io);
+
 
     server.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
