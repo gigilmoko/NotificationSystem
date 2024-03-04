@@ -28,7 +28,7 @@ const UserHeatAlert = ({ onNewAlert }) => {
     }, []);
 
     return (
-        <div className="App" style={{ backgroundColor: '#001F3F' }}>
+        <div className="App" style={{ backgroundColor: '#001F3F' , minHeight: '100vh', height: '100%'}}>
             <Header />
             <div className="table-container">
                 <br />
@@ -48,7 +48,7 @@ const UserHeatAlert = ({ onNewAlert }) => {
                         {heatAlerts.map((heatAlert) => (
                             <tr key={heatAlert._id}>
                                 <td>{heatAlert.heatIndex && heatAlert.heatIndex.heatIndex}</td>
-                                <td>{heatAlert.warning}</td>
+                                <td >{heatAlert.warning}</td>
                                 <td>{heatAlert.details}</td>
                                 <td>{new Date(heatAlert.timestamp).toLocaleString()}</td>
                             </tr>
@@ -74,7 +74,7 @@ const styles = `
         font-family: 'Open Sans', sans-serif;
         font-weight: 300;
         line-height: 1.42em;
-        color:#A7A1AE;
+        color:#F5E8C7;
         background-color:#1F2739;
     }
 
@@ -110,8 +110,9 @@ const styles = `
         font-weight: bold;
         font-size: 1em;
         text-align: left;
-        color: #185875;
+        color: #F5E8C7;
     }
+   
 
     .container td {
         font-weight: normal;

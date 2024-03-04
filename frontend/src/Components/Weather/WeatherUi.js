@@ -68,32 +68,32 @@ const WeatherUi = () => {
 
   useEffect(() => {
     const defaultCity = 'Taguig';
-
-    // Fetch current weather
+  
+    // Function to fetch current weather
     const fetchCurrentWeather = async () => {
       try {
         const res = await axios.get(`${api.base}weather?q=${defaultCity}&units=metric&APPID=${api.key}`);
         console.log('Current Weather API Response:', res.data);
-
+  
         setCurrentWeather({
           temp: res.data.main.temp,
           humidity: res.data.main.humidity,
           windSpeed: res.data.wind.speed,
           precipitation: res.data.rain ? res.data.rain['1h'] : 0,
         });
-
+  
         setCurrentDate(new Date().toLocaleString('en-US', { timeZone: philippineTimezone }));
       } catch (error) {
         console.error('Error fetching current weather data:', error);
       }
     };
-
-    // Fetch forecast data
+  
+    // Function to fetch forecast data
     const fetchForecastData = async () => {
       try {
         const res = await axios.get(`${api.base}forecast?q=${defaultCity}&units=metric&APPID=${api.key}`);
         console.log('Forecast API Response:', res.data);
-
+  
         const next5HoursData = res.data.list
           .slice(0, 5)
           .map((data) => ({
@@ -105,16 +105,16 @@ const WeatherUi = () => {
             temp: data.main.temp,
             icon: data.weather[0].icon,
           }));
-
+  
         setNext5HoursForecast(next5HoursData);
-
+  
         const next5DaysData = res.data.list.filter((data) => {
           const date = new Date(data.dt * 1000).toLocaleDateString('en-US', {
             timeZone: philippineTimezone,
           });
           return date !== currentDate;
         });
-
+  
         const temperatureRangeData = next5DaysData.reduce((acc, data) => {
           const date = new Date(data.dt * 1000).toLocaleDateString('en-US', {
             timeZone: philippineTimezone,
@@ -125,23 +125,34 @@ const WeatherUi = () => {
           acc[date].push(data.main.temp);
           return acc;
         }, {});
-
+  
         const rangeData = Object.entries(temperatureRangeData).map(([date, temps]) => ({
           date,
           minTemp: Math.min(...temps),
           maxTemp: Math.max(...temps),
           icon: next5DaysData[0].weather[0].icon,
         }));
-
+  
         setTemperatureRange(rangeData);
       } catch (error) {
         console.error('Error fetching forecast data:', error);
       }
     };
+  
+    // Set interval to refresh data every second
+    const intervalId = setInterval(() => {
+      fetchCurrentWeather();
+      fetchForecastData();
+    }, 1000);
+  
+    // Initial fetch
     fetchCurrentWeather();
     fetchForecastData();
-  }, [currentDate]);
-
+  
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, []);
+  
 
   return (
     <div style={{ backgroundColor: "#001F3F" }}>
@@ -215,7 +226,7 @@ const WeatherUi = () => {
                 </div>
               </div>
 
-          <div className="card" style={{ borderRadius: 25, height: '250px', width: '524px' }}>
+          <div className="card" style={{ borderRadius: 25, height: '250px', width: '524px',  }}>
             <div className="card-body p-4">
               <div id="demo3" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">
@@ -250,6 +261,7 @@ const WeatherUi = () => {
       </div>
     </div>
   </section>
+  <div style = {{marginBottom: '150px'}}></div>
   <Footer/>
   </div>
   )

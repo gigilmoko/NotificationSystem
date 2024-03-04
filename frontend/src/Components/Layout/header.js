@@ -105,7 +105,7 @@ useEffect(() => {
                   </li>
                   <li className="menu-itemhome1">
                     <a href="/userNotif" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
-                      Notif
+                      Notification
                     </a>
                   </li>
                 </ul>
