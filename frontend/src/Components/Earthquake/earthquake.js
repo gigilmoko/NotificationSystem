@@ -29,7 +29,7 @@ const Earthquake = () => {
   }, []);
 
   return (
-    <div className="App" style = {{backgroundColor: '#001F3F'}}>
+    <div className="App" style = {{backgroundColor: '#001F3F', minHeight: '100vh', height: '100%'}}>
       <Header/>
         <div className="table-container">
         <br/>
