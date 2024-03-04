@@ -41,16 +41,16 @@ const UserHeatAlert = ({ onNewAlert }) => {
                             <th style={{ color: 'black' }}>HEAT INDEX</th>
                             <th style={{ color: 'black' }}>WARNING</th>
                             <th style={{ color: 'black' }}>DETAILS</th>
-                            <th style={{ color: 'black' }}>Date and Time</th>
+                            <th style={{ color: 'black' }}>DATE AND TIME</th>
                         </tr>
                     </thead>
                     <tbody>
                         {heatAlerts.map((heatAlert) => (
                             <tr key={heatAlert._id}>
-                                <td>{heatAlert.heatIndex && heatAlert.heatIndex.heatIndex}</td>
-                                <td >{heatAlert.warning}</td>
-                                <td>{heatAlert.details}</td>
-                                <td>{new Date(heatAlert.timestamp).toLocaleString()}</td>
+                                <td style= {{ color: '#F5E8C7' }}>{heatAlert.heatIndex && heatAlert.heatIndex.heatIndex}</td>
+                                <td style= {{ color: '#F5E8C7' }}>{heatAlert.warning}</td>
+                                <td style= {{ color: '#F5E8C7' }}>{heatAlert.details}</td>
+                                <td style= {{ color: '#F5E8C7' }}> {new Date(heatAlert.timestamp).toLocaleString()}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -120,6 +120,7 @@ const styles = `
         -webkit-box-shadow: 0 2px 2px -2px #0E1119;
         -moz-box-shadow: 0 2px 2px -2px #0E1119;
             box-shadow: 0 2px 2px -2px #0E1119;
+        width: 2px
     }
 
     .container {

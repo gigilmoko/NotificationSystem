@@ -53,8 +53,8 @@ const Earthquake = () => {
               {earthquakes.map((earthquake) => (
                 <tr key={earthquake._id}>
                   <td>{earthquake.mag}</td>
-                  <td>{earthquake.place}</td>
-                  <td style={{ color: '#F5E8C7' }}>{new Date(earthquake.time).toLocaleString()}</td>
+                  <td style = {{ color: '#F5E8C7'}}>{earthquake.place}</td>
+                  <td style= {{ color: '#F5E8C7' }}>{new Date(earthquake.time).toLocaleString()}</td>
                   {/* <td>{earthquake.coordinates.join(', ')}</td> */}
                 </tr>
               ))}
