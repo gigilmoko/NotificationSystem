@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import io from 'socket.io-client';
 
 import EarthquakeSite from './Components/Earthquake/earthquake'
-import WeatherSite from './Components/Weather/weather'
+// import WeatherSite from './Components/Weather/weather'
 import Login from './Components/User/Login'
 import Register from './Components/User/Register'
 import NewHome from './Components/Home/newhome'
@@ -80,7 +80,7 @@ function App() {
             {/* ----Home---- */}
             <Route path = "/" element = { <NewHome/> } /> 
             <Route path ="/earthquake" element = {<EarthquakeSite/>} />
-            <Route path ="/weather" element = {<WeatherSite/>} />
+            {/* <Route path ="/weather" element = {<WeatherSite/>} /> */}
             <Route path ="/weatherUi" element = {<WeatherUi/>} />
             <Route path = "/about" element = { <About/> } /> 
 

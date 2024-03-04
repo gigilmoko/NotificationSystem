@@ -16,11 +16,8 @@ const UserHeatAlert = ({ onNewAlert }) => {
             }
             };
             const { data } = await axios.get(`${process.env.REACT_APP_API}/api/getHeatAlert`, config);
+            console.log(data);
             setHeatAlerts(data.heatAlerts);
-    
-            if (data.heatAlerts.length > 0) {
-            onNewAlert(data.heatAlerts[0]);
-            }
         } catch (error) {
             setError(error.response.data.message);
         }
