@@ -173,7 +173,6 @@ const saveHeatIndex = async (weatherCityName, weatherApiKey, io) => {
     }
 };
 
-
 const startCronJobsWeather = (io) => {
     cron.schedule('0 * * * *', async () => {
         const weatherCityName = 'Taguig';

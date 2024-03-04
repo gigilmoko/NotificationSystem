@@ -15,19 +15,18 @@ const deg2rad = (deg) => {
 };
 
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Radius of the Earth in kilometers
+    const R = 6371;
     const dLat = deg2rad(lat2 - lat1);
     const dLon = deg2rad(lon2 - lon1);
     const a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in kilometers
+    const distance = R * c; 
     return distance;
 };
 
 const isTaguigAffected = (event) => {
-    // Check if event and its geometry are defined
     if (event && event.geometry && event.geometry.coordinates) {
         const distance = calculateDistance(
             TAGUIG_CITY_COORDINATES.latitude,
@@ -37,9 +36,8 @@ const isTaguigAffected = (event) => {
         );
         return distance <= TAGUIG_AFFECTED_RADIUS;
     } else {
-        // Log a warning or handle the case where the event structure is not as expected
-        console.warn('Invalid event structure:', event);
-        return false; // You may choose to return true or false based on your logic
+        console.warn('Details:', event);
+        return false;
     }
 };
 
