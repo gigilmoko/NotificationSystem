@@ -62,13 +62,10 @@ const about = () => {
           </div>
           <div
             className="col-lg-7"
-            
+            style = {{marginTop: '-8px'}}
           >
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+         
+        
             <h5 className="section-about-title pe-3" style={{ color: '#F5E8C7' }}>About Us</h5>
             <br/>
             <br/>
@@ -97,10 +94,10 @@ const about = () => {
     </div>
     {/* About End */}
     {/* Travel Guide Start */}
-    <div className="container-fluid guide py-5">
+    <div className="container-fluid guide py-5"style = {{marginTop: '-100px'}}>
       <div className="container py-5">
         <div className="mx-auto text-center mb-5" style={{ maxWidth: 900 }}>
-          <h5 className="section-title px-3">Notifcaution's</h5>
+          <h5 className="section-title px-3">Notificaution's</h5>
           <h1 className="mb-0" style={{ color: '#F5E8C7' }}>Development Team</h1>
         </div>
         <div className="row g-4">

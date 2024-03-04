@@ -39,12 +39,12 @@ const newhome = () => {
       </div> */}
     </div>
   </section>
-  <section id="company-services">
+  <section id="company-services" style = {{marginTop: '-100px'}}>
     <div className="container my-5">
       <div className="row">
         <div className="icon-box-wrapper d-flex flex-wrap justify-content-between">
           <div className="icon-box text-center col-md-6 col-sm-12">
-            <div className="content-box border-top border-bottom">
+            <div className="content-box border-top border-bottom" style = {{height: '255px'}}>
               <div className="icon-box-icon">
                 <i className="icon icon-shipping" />
               </div>
@@ -69,7 +69,7 @@ const newhome = () => {
             </div>
           </div> */}
           <div className="icon-box text-center col-md-6 col-sm-12">
-            <div className="content-box border-top border-bottom">
+            <div className="content-box border-top border-bottom" style = {{height: '255px'}}>
               <div className="icon-box-icon">
                 <i className="icon icon-package" />
               </div>
@@ -85,8 +85,9 @@ const newhome = () => {
       </div>
     </div>
   </section>
+  <div style = {{marginTop: '-140px'}}>
   <Footer/>
-  
+  </div>
   
   </div>
   
