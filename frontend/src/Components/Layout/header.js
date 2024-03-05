@@ -111,11 +111,6 @@ useEffect(() => {
                     </a>
                   </li>
                   <li className="menu-itemhome1">
-<<<<<<< Updated upstream
-                    <a href="/notification" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
-                      Notification
-                    </a>
-=======
                     <div className="dropdown" onClick={toggleDropdown}>
                       <button
                         className="btn btn-secondary dropdown-toggle"
@@ -126,10 +121,10 @@ useEffect(() => {
                         aria-expanded="false"
                         style={{ color: '#F5E8C7', backgroundColor: 'transparent', border: 'none' }}
                       >
-                        NOTIFICATION
+                        Notification
                       </button>
                       <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
-                        <a className="dropdown-item" href="/userNotif" onClick={() => handleDropdownItemClick('Heat Index')}>
+                        <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Heat Index')}>
                           Heat Index
                         </a>
                         <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Typhoon')}>
@@ -140,7 +135,6 @@ useEffect(() => {
                         </a>
                       </div>
                     </div>
->>>>>>> Stashed changes
                   </li>
                 </ul>
               </nav>
