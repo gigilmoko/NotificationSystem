@@ -29,19 +29,16 @@ const Header = () => {
         await axios.get(`${process.env.REACT_APP_API}/api/logout`);
         setUser({});
         logout(() => navigate('/'));
-        toast.success('Logged out', {
-            position: toast.POSITION.BOTTOM_RIGHT,
-        });
         // Reload the window after logging out
         window.location.reload();
     } catch (error) {
         if (error.response && error.response.data && error.response.data.message) {
-          toast.error(error.response.data.message);
+            console.error(error.response.data.message);
         } else {
-          toast.error('An error occurred while logging out');
+            console.error('An error occurred while logging out');
         }
     }
-  };
+};
 
 
 
@@ -104,7 +101,7 @@ useEffect(() => {
                     </a>
                   </li>
                   <li className="menu-itemhome1">
-                    <a href="/userNotif" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
+                    <a href="/notification" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
                       Notification
                     </a>
                   </li>
@@ -133,7 +130,7 @@ useEffect(() => {
                       </a>
                     </li>
                     <li>
-                      <a href="/weatherUi" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
+                      <a href="/weather" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
                         Weather
                       </a>
                     </li>

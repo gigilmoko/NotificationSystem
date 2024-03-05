@@ -1,13 +1,9 @@
 .gradient-custom {
     /* fallback for old browsers */
-    background: #ffffff;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1))
-    }
+        background: #f09819;
+    background: -webkit-linear-gradient(0deg, #f09819 0%, #edde5d 100%);
+    background: linear-gradient(0deg, #f09819 0%, #edde5d 100%);
+        }
     
     .carousel-indicators li {
     background-color: #282828;
@@ -15,3 +11,69 @@
     height: 7px;
     border-radius: 50%;
     }
+
+.gradient-custom1{
+    /* fallback for old browsers */
+    background: #a0e9ff;
+    background: -webkit-linear-gradient(0deg, #a0e9ff 0%, #a8f0ff 50%, #c6f5ff 100%);
+    background: linear-gradient(0deg, #a0e9ff 0%, #a8f0ff 50%, #c6f5ff 100%);
+        }
+    
+    .carousel-indicators li {
+    background-color: #282828;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    }
+
+.gradient-custom2{
+        /* fallback for old browsers */
+        background: #e66a5a;
+        background: -webkit-linear-gradient(0deg, #e66a5a 0%, #e39c40 100%);
+        background: linear-gradient(0deg, #e66a5a 0%, #e39c40 100%);
+            }
+        
+        .carousel-indicators li {
+        background-color: #282828;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        }
+
+
+
+/* CSS */
+
+
+/* CSS */
+.button-62 {
+  background: linear-gradient(to bottom right, #ffb99a, #ffdbc5);
+  border: 0;
+  border-radius: 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.button-62:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button-62:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+   

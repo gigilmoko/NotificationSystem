@@ -7,7 +7,7 @@ import '../../assets/css/lightbox.min.css'
 import image1 from '../../assets/css/img/about1.jpg'
 import Header from '../Layout/header'
 import emman from '../../assets/systempics/emman.jpg'
-
+import Footer from '../Layout/footer'
 import jis from '../../assets/systempics/jis.jpg'
 import aivy from '../../assets/systempics/aivy.jpg'
 import von from '../../assets/systempics/von.jpg'
@@ -290,6 +290,7 @@ const about = () => {
     </div>
 
   </>
+  <Footer/>
   </div>
   )
 }

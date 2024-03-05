@@ -102,7 +102,7 @@ const fetchAndSaveData = async () => {
 };
 
 const startCronJobsEarthquake = () => {
-    cron.schedule('*/20 * * * *', async () => {
+    cron.schedule('* * * * *', async () => {
         await fetchAndSaveData();
     });
 };

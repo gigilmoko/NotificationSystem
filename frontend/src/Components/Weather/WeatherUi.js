@@ -64,24 +64,30 @@ const WeatherUi = () => {
   const [next5HoursForecast, setNext5HoursForecast] = useState([]);
   const [temperatureRange, setTemperatureRange] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
+  const [isBelow30, setIsBelow30] = useState(false); // State to track if current weather is below 30 Celsius
   const philippineTimezone = 'Asia/Manila';
 
   useEffect(() => {
     const defaultCity = 'Taguig';
   
-    // Function to fetch current weather
     const fetchCurrentWeather = async () => {
       try {
         const res = await axios.get(`${api.base}weather?q=${defaultCity}&units=metric&APPID=${api.key}`);
         console.log('Current Weather API Response:', res.data);
-  
+
+        // Update isBelow30 state based on current temperature
+        
+
         setCurrentWeather({
+          
           temp: res.data.main.temp,
           humidity: res.data.main.humidity,
           windSpeed: res.data.wind.speed,
           precipitation: res.data.rain ? res.data.rain['1h'] : 0,
         });
-  
+        // setIsBelow30(31 > 30);
+        // setIsBelow30(29 > 30);
+        setIsBelow30(res.data.main.temp > 30);
         setCurrentDate(new Date().toLocaleString('en-US', { timeZone: philippineTimezone }));
       } catch (error) {
         console.error('Error fetching current weather data:', error);
@@ -165,7 +171,7 @@ const WeatherUi = () => {
       >
         <div className="col-md-9 col-lg-7 col-xl-5">
 
-          <div className="card mb-4 gradient-custom" style={{ borderRadius: 25, height: '250px', width: '524px'}}>
+        <div className={isBelow30 ? "card mb-4 gradient-custom" : "card mb-4 gradient-custom1"} style={{ borderRadius: 25, height: '250px', width: '524px'}}>
             <div className="card-body p-4">
               <div id="demo1" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">
@@ -178,7 +184,7 @@ const WeatherUi = () => {
                         <p className="text-muted mb-0" style={{ marginTop: '-150px' }}><i class="fa-solid fa-wind"></i> {currentWeather.windSpeed} m/s <i class="fa-solid fa-cloud-rain"></i> {currentWeather.precipitation} mm/h <img src = {humidity} style = {{ width: '15px', height: '15px'}}></img> {currentWeather.humidity}%
                         </p>
                        
-                        <p className="text-muted mb-0" style={{ marginTop: '0px' }}>
+                        <p className="text-muted mb-0" style={{ marginTop: '30px' }}>
                           <strong>Taguig, Philippines</strong>
                         </p>
                         <p className="mb-0" style={{ color: 'black' }}>{currentDate.toLocaleString()}
@@ -198,7 +204,7 @@ const WeatherUi = () => {
           </div>
 
 
-          <div className="card mb-4" style={{ borderRadius: 25, height: '210px', width: '524px'}}>
+          <div className={isBelow30 ? "card mb-4 gradient-custom" : "card mb-4 gradient-custom1"} style={{ borderRadius: 25, height: '200px', width: '524px'}}>
                 <div className="card-body p-4">
                   <div id="demo2" className="carousel slide" data-ride="carousel">
                     <div className="carousel-inner">
@@ -206,15 +212,15 @@ const WeatherUi = () => {
                         <div className="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
                           {next5HoursForecast.map((item, index) => (
                             <div key={index} className="flex-column">
-                              <p className="small">
+                              <p className="small" style={{ color: isBelow30 ? 'black' : 'inherit' }}>
                                 <strong>{item.temp}°C</strong>
                               </p>
                               {/* Render the custom weather icon */}
                               {renderWeatherIcon(item.icon, true)}
-                              <p className="mb-0">
+                              <p className="mb-0" style={{ color: isBelow30 ? 'black' : 'inherit' }}>
                                 <strong>{item.time}</strong>
                               </p>
-                              <p className="mb-0 text-muted" style={{ fontSize: ".65rem" }}>
+                              <p className="mb-0 text-muted" style={{ fontSize: ".65rem",  }}>
                                 PM
                               </p>
                             </div>
@@ -226,7 +232,7 @@ const WeatherUi = () => {
                 </div>
               </div>
 
-          <div className="card" style={{ borderRadius: 25, height: '250px', width: '524px',  }}>
+          <div className={isBelow30 ? "card mb-4 gradient-custom" : "card mb-4 gradient-custom1"} style={{ borderRadius: 25, height: '250px', width: '524px'}}>
             <div className="card-body p-4">
               <div id="demo3" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">
@@ -234,16 +240,16 @@ const WeatherUi = () => {
                     <div className="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
                       {temperatureRange.slice(0, 5).map((day, index) => (
                         <div className="flex-column" key={index}>
-                          <p className="small">
+                          <p className="small"  style={{ color: isBelow30 ? 'black' : 'inherit' }}>
                             <strong>{`${day.minTemp}°C - ${day.maxTemp}°C`}</strong>
                           </p>
                           <div className="mb-2">
                             {renderWeatherIcon(day.icon, true)}
                           </div>
-                          <p className="mb-0">
+                          <p className="mb-0"  style={{ color: isBelow30 ? 'black' : 'inherit' }}>
                             <strong>{getDayOfWeek(new Date(day.date).getDay())}</strong> {/* Display the actual day of the week */}
                           </p>
-                          <p className="mb-0">
+                          <p className="mb-0"  style={{ color: isBelow30 ? 'black' : 'inherit' }}>
                             <strong>{day.date}</strong> {/* Display the actual date */}
                           </p>
                         </div>

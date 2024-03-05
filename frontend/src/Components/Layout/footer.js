@@ -5,7 +5,7 @@ import '../../assets/css/style.css'
 
 const footer = () => {
   return (
-    <div><footer id="footer" className="overflow-hidden">
+    <div ><footer id="footer" className="overflow-hidden">
     <div className="container mt-5">
       <div className="row">
         <div className="footer-top-area">
@@ -52,29 +52,30 @@ const footer = () => {
             </div>
             <div className="col-lg-2 col-sm-6">
               <div className="footer-menu menu-002">
-                <h5 className="widget-title" style={{ color: '#F5E8C7' }}>Quick Links</h5>
+                <h5 className="widget-title"  style={{ color: '#F5E8C7', marginLeft: '20px' }}>Links</h5>
                 <ul className="menu-list list-unstyled text-uppercase">
                   <li className="menu-item">
-                    <a href="#" style = {{color: '#F5E8C7'}}>Home</a>
+                    <a href="/" style = {{color: '#F5E8C7'}}>Home</a>
+                  </li>
+                  <br/>
+                  <li className="menu-item">
+                    <a href="/about" style = {{color: '#F5E8C7'}}>About</a>
                   </li>
                   <li className="menu-item">
-                    <a href="#" style = {{color: '#F5E8C7'}}>About</a>
+                    <a href="/earthquake" style = {{color: '#F5E8C7'}}>Earthquake</a>
                   </li>
                   <li className="menu-item">
-                    <a href="#" style = {{color: '#F5E8C7'}}>Shop</a>
+                    <a href="/weather" style = {{color: '#F5E8C7'}}>Weather</a>
                   </li>
                   <li className="menu-item">
-                    <a href="#" style = {{color: '#F5E8C7'}}>Blogs</a>
-                  </li>
-                  <li className="menu-item">
-                    <a href="#" style = {{color: '#F5E8C7'}}>Contact</a>
+                    <a href="/notification" style = {{color: '#F5E8C7'}}>Notifications</a>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="col-lg-3 col-sm-6">
               <div className="footer-menu text-uppercase menu-003">
-                <h5 className="widget-title">Help &amp; Info</h5>
+                <h5 className="widget-title" style= {{marginLeft: '20px'}}>Help &amp; Info</h5>
                 <ul className="menu-list list-unstyled">
                   <li className="menu-item">
                     <a href="#" style = {{color: '#F5E8C7'}}>Track Your Order</a>

@@ -73,32 +73,32 @@ const userList = () => {
     const data = {
         columns: [
             {
-                label: 'ID',
+                label: <span style={{ color: '#F5E8C7' }}>ID</span>,
                 field: 'id',
                 sort: 'asc'
             },
             {
-                label: 'Name',
+                label: <span style={{ color: '#F5E8C7' }}>Name</span>,
                 field: 'name',
                 sort: 'asc',
             },
             {
-                label: 'Email',
+                label: <span style={{ color: '#F5E8C7' }}>Email</span>,
                 field: 'email',
                 sort: 'asc'
             },
             {
-                label: 'Role',
+                label: <span style={{ color: '#F5E8C7' }}>Role</span>,
                 field: 'role',
                 sort: 'asc'
             },
             {
-                label: 'Image',
+                label: <span style={{ color: '#F5E8C7' }}>Image</span>,
                 field: 'image',
                 sort: 'asc'
             },
             {
-                label: 'Actions',
+                label: <span style={{ color: '#F5E8C7' }}>Actions</span>,
                 field: 'actions',
             },
         ],
@@ -108,10 +108,10 @@ const userList = () => {
     users.forEach(user => {
         const avatarURL = user.avatar;
         data.rows.push({
-            id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
+            id: <span style={{ color: '#F5E8C7' }}>{user._id}</span>,
+            name: <span style={{ color: '#F5E8C7' }}>{user.name}</span>,
+            email: <span style={{ color: '#F5E8C7' }}>{user.email}</span>,
+            role: <span style={{ color: '#F5E8C7' }}>{user.role}</span>,
             image: avatarURL && (
                 <img src={avatarURL} alt="User Avatar" style={{ width: '75px', height: '75px' }} />
             ),
@@ -142,6 +142,7 @@ const userList = () => {
                             bordered
                             striped
                             hover
+                            style={{ backgroundColor: '#323C50 ' }}
                         />
                     </Fragment>
                 </div>

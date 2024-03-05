@@ -32,17 +32,17 @@ const AdminEarthquake = () => {
         const data = {
             columns: [
                 {
-                    label: 'Magnitude',
+                    label: <span style={{ color: '#F5E8C7' }}>Magnitude</span>,
                     field: 'mag',
                     sort: 'asc',
                 },
                 {
-                    label: 'Place',
+                    label: <span style={{ color: '#F5E8C7' }}>Place</span>,
                     field: 'place',
                     sort: 'asc',
                 },
                 {
-                    label: 'Location',
+                    label: <span style={{ color: '#F5E8C7' }}>Location</span>,
                     field: 'coordinates',
                     sort: 'asc',
                 }
@@ -52,9 +52,9 @@ const AdminEarthquake = () => {
     
         earthquakes.forEach(earthquake => {
             data.rows.push({
-                mag: earthquake.mag,
-                place: earthquake.place,
-                coordinates: `${earthquake.coordinates.coordinates[0]}, ${earthquake.coordinates.coordinates[1]}`, 
+                mag: <span style={{color: '#F5E8C7'}}>{earthquake.mag}</span>,
+                place: <span style={{color: '#F5E8C7'}}>{earthquake.place}</span>,
+                coordinates: <span style={{color: '#F5E8C7'}}>{`${earthquake.coordinates.coordinates[0]}, ${earthquake.coordinates.coordinates[1]}`}</span>, 
             });
         });
     
@@ -63,6 +63,7 @@ const AdminEarthquake = () => {
 
     return (
         <Fragment>
+<<<<<<< Updated upstream
             <div class = "custom-container" style = {{ backgroundColor: '#001F3F', height: '100%', width: '100%', minHeight: '100vh',  overflow: 'hidden'}}>
                 <div className="row">
                 
@@ -71,21 +72,32 @@ const AdminEarthquake = () => {
                 <Sidebar />
                 </div>
                 </div>
+=======
+            <div className="custom-container" style={{ backgroundColor: '#001F3F', height: '100%', width: '100%', minHeight: '100vh', overflow: 'hidden' }}>
+                <div className="row">
+>>>>>>> Stashed changes
 
-                <div className="col-12 col-md-10">
-                    <Fragment>
-                        <br></br>
-                        <h1 className="my-6" style = {{color: '#F5E8C7'}}>All Earthquakes</h1>
-                        <MDBDataTable
-                            data={earthquakesList()}
-                            className="px-3"
-                            bordered
-                            striped
-                            hover
-                        />
-                    </Fragment>
+                    <div className="col-12 col-md-2">
+                        <div className="sidebar pe-4 pb-3">
+                            <Sidebar />
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-md-10">
+                        <Fragment>
+                            <br></br>
+                            <h1 className="my-6" style={{ color: '#F5E8C7' }}>All Earthquakes</h1>
+                            <MDBDataTable
+                                data={earthquakesList()}
+                                className="px-3"
+                                bordered
+                                striped
+                                hover
+                                style={{ backgroundColor: '#323C50 ' }}
+                            />
+                        </Fragment>
+                    </div>
                 </div>
-            </div>
             </div>
         </Fragment>
     )

@@ -33,43 +33,43 @@ const AdminWeather = () => {
         const data = {
             columns: [
                 {
-                    label: 'Date',
+                    label: <span style={{ color: '#F5E8C7' }}>Date</span>,
                     field: 'date',
                     sort: 'asc',
                 },
                 {
-                    label: 'Time',
+                    label: <span style={{ color: '#F5E8C7' }}>Time</span>,
                     field: 'time',
                     sort: 'asc',
                 },
                 {
-                    label: 'Temperature',
+                    label: <span style={{ color: '#F5E8C7' }}>Temperature</span>,
                     field: 'temperature',
                     sort: 'asc',
                 },
                 
                 {
-                    label: 'Range',
+                    label: <span style={{ color: '#F5E8C7' }}>Range</span>,
                     field: 'temperatureRange',
                     sort: 'asc',
                 },
                 {
-                    label: 'Humidity',
+                    label: <span style={{ color: '#F5E8C7' }}>Humidity</span>,
                     field: 'humidity',
                     sort: 'asc',
                 },
                 {
-                    label: 'Description',
+                    label: <span style={{ color: '#F5E8C7' }}>Description</span>,
                     field: 'weatherDescription',
                     sort: 'asc',
                 },
                 {
-                    label: 'Wind Speed',
+                    label: <span style={{ color: '#F5E8C7' }}>Wind Speed</span>,
                     field: 'windSpeed',
                     sort: 'asc',
                 },
                 {
-                    label: 'Pressure',
+                    label: <span style={{ color: '#F5E8C7' }}>Pressure</span>,
                     field: 'pressure',
                     sort: 'asc',
                 },
@@ -83,14 +83,15 @@ const AdminWeather = () => {
             const temperatureRange = `${weather.tempMin} - ${weather.tempMax} °C`;
             
             data.rows.push({
-                date: date,
-                time: time.slice(0, -8),
-                temperature: `${weather.temperature} °C`,
-                temperatureRange: temperatureRange,
-                humidity: `${weather.humidity} %`, 
-                weatherDescription: weather.weatherDescription,
-                windSpeed: `${weather.windSpeed} m/s`,
-                pressure: weather.pressure,
+                date: <span style={{ color: '#F5E8C7' }}>{date}</span>,
+                time: <span style={{ color: '#F5E8C7' }}>{time.slice(0, -8)}</span>,
+                temperature: <span style={{ color: '#F5E8C7' }}>{`${weather.temperature} °C`}</span>,
+                temperatureRange: <span style={{ color: '#F5E8C7' }}>{temperatureRange}</span>,
+                humidity: <span style={{ color: '#F5E8C7' }}>{`${weather.humidity} %`}</span>,
+                weatherDescription: <span style={{ color: '#F5E8C7' }}>{weather.weatherDescription}</span>,
+                windSpeed: <span style={{ color: '#F5E8C7' }}>{`${weather.windSpeed} m/s`}</span>,
+                pressure: <span style={{ color: '#F5E8C7' }}>{weather.pressure}</span>,
+        
             });
         });
     
@@ -114,13 +115,15 @@ const AdminWeather = () => {
                         <br></br>
                         <h1 className="my-6" style = {{color: '#F5E8C7'}}>Weather Lists</h1>
                         <MDBDataTable
-                            data={weatherList()}
-                            className="px-3"
-                            bordered
-                            striped
-                            hover
-                            theadStyle={{ backgroundColor: '#323C50', color: '#F5E8C7' }}
-                        />
+    data={weatherList()}
+    className="px-3"
+    bordered
+    striped
+    hover
+    style={{ backgroundColor: '#323C50 ' }}
+    // Add rowStyle to apply color to rows
+  
+/>
                     </Fragment>
                 </div>
             </div>

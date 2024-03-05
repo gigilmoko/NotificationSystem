@@ -31,6 +31,7 @@ import WeatherUi from './Components/Weather/WeatherUi'
 import UserHeatAlert from './Components/User/HeatReport';
 import UpdateProfile from './Components/User/UpdateProfile'
 import ToastAlert from './Components/User/ToastAlert';
+import EarthquakeSite2 from './Components/Earthquake/EarthquakeNewUI'
 
 
 const socket = io('http://localhost:4001');
@@ -78,12 +79,13 @@ function App() {
             <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
             <Route path ="/userForecast" element = {<WeatherApp/>} />
             {/* <Route path="/userNotif" element={<UserHeatAlert onNewAlert={(alert) => setNewAlert(alert)} />} /> */}
-            <Route path="/userNotif" element={ <ProtectedRoute isAdmin={false}> <UserHeatAlert /> </ProtectedRoute> } />
+            <Route path="/notification" element={ <ProtectedRoute isAdmin={false}> <UserHeatAlert /> </ProtectedRoute> } />
             {/* ----Home---- */}
             <Route path = "/" element = { <NewHome/> } /> 
             <Route path ="/earthquake" element = {<EarthquakeSite/>} />
+            <Route path ="/earthquake2" element = {<EarthquakeSite2/>} />
             {/* <Route path ="/weather" element = {<WeatherSite/>} /> */}
-            <Route path ="/weatherUi" element = {<WeatherUi/>} />
+            <Route path ="/weather" element = {<WeatherUi/>} />
             <Route path = "/about" element = { <About/> } /> 
 
             {/* ----User---- */}
