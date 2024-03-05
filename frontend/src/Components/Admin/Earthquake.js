@@ -63,7 +63,6 @@ const AdminEarthquake = () => {
 
     return (
         <Fragment>
-<<<<<<< Updated upstream
             <div class = "custom-container" style = {{ backgroundColor: '#001F3F', height: '100%', width: '100%', minHeight: '100vh',  overflow: 'hidden'}}>
                 <div className="row">
                 
@@ -72,10 +71,6 @@ const AdminEarthquake = () => {
                 <Sidebar />
                 </div>
                 </div>
-=======
-            <div className="custom-container" style={{ backgroundColor: '#001F3F', height: '100%', width: '100%', minHeight: '100vh', overflow: 'hidden' }}>
-                <div className="row">
->>>>>>> Stashed changes
 
                     <div className="col-12 col-md-2">
                         <div className="sidebar pe-4 pb-3">

@@ -44,19 +44,25 @@ const EarthquakeNewUI = () => {
     return (
         <div style={{ backgroundColor: "#001F3F" }}>
             <Header />
-            <section className="vh-100">
+            <section className="vh-100" >
                 <div className="container py-5 h-100">
-                    <div className="row d-flex justify-content-center align-items-center h-100">
+                    <h1 style = {{textAlign: 'center', color: '#F5E8C7' }}>Latest Earthquake</h1>
+                    <div className="row d-flex justify-content-center align-items-center h-100"   >
+                    <p style={{ color: '#F5E8C7', marginTop: '-200px', marginLeft: '780px' }}>Page {currentSlide + 1} of {earthquakes.length} </p>
                         <div className="col-md-9 col-lg-7 col-xl-5">
-                            <div className="card mb-4 gradient-custom2" style={{ borderRadius: 25, height: '250px', width: '524px', marginTop: '-300px'}}>
+                            
+                            <div className="card mb-4 gradient-custom2" style={{ borderRadius: 25, height: '250px', width: '524px', marginTop: '-380px'}}>
                                 <div className="card-body p-4 d-flex justify-content-between align-items-center">
                                     <div>
                                         {earthquakes.length > 0 &&
                                             <>
-                                                <p style={{ color: 'black', marginTop: '-60px' }}>{currentSlide + 1} of {earthquakes.length}</p>
-                                                <p style={{ color: 'black' }}>{earthquakes[currentSlide].mag}</p>
-                                                <p style={{ color: 'black' }}>{earthquakes[currentSlide].place}</p>
-                                                <p style={{ color: 'black' }}>{new Date(earthquakes[currentSlide].time).toLocaleString()}</p>
+                                               
+                                                <p style = {{fontSize: '45px', marginTop: '10px', textAlign: 'center'}}>MAGNITUDE</p>
+
+                                              
+                                                <p style={{ color: 'black', fontSize: '120px', marginTop: '-90px',  textAlign: 'center' }}>{earthquakes[currentSlide].mag}</p>
+                                                <p style={{ color: 'black',  fontSize: '15px', marginTop: '-45px'  }}>{earthquakes[currentSlide].place}</p>
+                                                <p style={{ color: 'black', marginLeft: '310px', marginTop: '-45px' }}>{new Date(earthquakes[currentSlide].time).toLocaleString()}</p>
                                                
                                             </>
                                         }
@@ -68,12 +74,14 @@ const EarthquakeNewUI = () => {
                     </div>
                    
                 </div>
-                <button className="button-62" role="button" onClick={goToPrevSlide} style = {{width: '60px', marginTop: '-1100px', marginLeft: '380px'}}><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                <button className="button-62" role="button" onClick={goToNextSlide}style = {{width: '60px', marginTop: '-1100px', marginLeft: '635px'}}><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                <button className="button-62" role="button" onClick={goToPrevSlide} style = {{width: '60px', marginTop: '-830px', marginLeft: '380px'}}><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                <button className="button-62" role="button" onClick={goToNextSlide}style = {{width: '60px', marginTop: '-830px', marginLeft: '635px'}}><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
             </section>
+            <div style = {{marginTop: '-170px'}}>
             <Footer />
-           
+            </div>
         </div>
+        
     )
 }
 

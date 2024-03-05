@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
-import Header from '../Layout/header'
-import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { getToken } from "../../utils/helpers";
+import Header from '../Layout/header';
+import Footer from '../Layout/footer';
 
 const Earthquake = () => {
   const [earthquakes, setEarthquakes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [earthquakesPerPage] = useState(10); // Number of earthquakes per page
   const [error, setError] = useState('');
 
   const getEarthquakes = async () => {
@@ -28,48 +30,63 @@ const Earthquake = () => {
     getEarthquakes();
   }, []);
 
+  // Change page
+  const paginate = (pageNumber, event) => {
+    event.preventDefault();
+    setCurrentPage(pageNumber);
+  };
+
+  // Get current earthquakes
+  const indexOfLastEarthquake = currentPage * earthquakesPerPage;
+  const indexOfFirstEarthquake = indexOfLastEarthquake - earthquakesPerPage;
+  const currentEarthquakes = earthquakes.length > 0 ? earthquakes.slice(indexOfFirstEarthquake, indexOfLastEarthquake) : [];
+
   return (
-    <div className="App" style = {{backgroundColor: '#001F3F', minHeight: '100vh', height: '100%'}}>
-      <Header/>
-        <div className="table-container">
-        <br/>
-      
-      
-        
-          <h1 style = {{ color: '#F5E8C7'}}>Notification Earthquake Data in Philippines</h1>
-          <br/>
-          
-          <br/>
-          <table className="container">
-            <thead>
-              <tr>
-                <th style={{ color: 'black' }}>MAGNITUDE</th>
-                <th style={{ color: 'black' }}>LOCATION</th>
-                <th style={{ color: 'black' }}>DATE</th>
-                {/* <th style={{ color: 'black' }}>COORDINATES</th> */}
+    <div className="App" style={{ backgroundColor: '#001F3F', minHeight: '100vh', height: '100%' }}>
+      <Header />
+      <div className="table-container">
+        <br />
+        <h1 style={{ color: '#F5E8C7' }}>Notification Earthquake Data in Philippines</h1>
+        <br />
+        <br />
+        <table className="container">
+          <thead>
+            <tr>
+              <th style={{ color: 'black' }}>MAGNITUDE</th>
+              <th style={{ color: 'black' }}>LOCATION</th>
+              <th style={{ color: 'black' }}>DATE</th>
+              {/* <th style={{ color: 'black' }}>COORDINATES</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            {currentEarthquakes.map((earthquake) => (
+              <tr key={earthquake._id}>
+                <td>{earthquake.mag}</td>
+                <td style={{ color: '#F5E8C7' }}>{earthquake.place}</td>
+                <td style={{ color: '#F5E8C7' }}>{new Date(earthquake.time).toLocaleString()}</td>
+                {/* <td>{earthquake.coordinates.join(', ')}</td> */}
               </tr>
-            </thead>
-            <tbody>
-              {earthquakes.map((earthquake) => (
-                <tr key={earthquake._id}>
-                  <td>{earthquake.mag}</td>
-                  <td style = {{ color: '#F5E8C7'}}>{earthquake.place}</td>
-                  <td style= {{ color: '#F5E8C7' }}>{new Date(earthquake.time).toLocaleString()}</td>
-                  {/* <td>{earthquake.coordinates.join(', ')}</td> */}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <br/>  
-        <br/>   
+            ))}
+          </tbody>
+        </table>
         <br/>
-      
+        <ul className="pagination" style={{ display: 'flex', justifyContent: 'center' }}>
+  {Array.from({ length: Math.ceil(earthquakes.length / earthquakesPerPage) }, (_, i) => (
+    <li key={i} className="page-item">
+      <a onClick={(event) => paginate(i + 1, event)} href="!#" className="page-link">{i + 1}</a>
+    </li>
+  ))}
+</ul>
+      </div>
+      <br />
+      <br />
+      <br />
     </div>
   );
 }
 
 export default Earthquake;
+
 
 const styles = `
   @charset "UTF-8";
