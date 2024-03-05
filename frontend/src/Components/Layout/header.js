@@ -9,10 +9,6 @@ import '../../assets/css/style.css';
 import LogoImage from '../../assets/systempics/logo3.png';
 import { Helmet } from 'react-helmet';
 import { logout, getUser } from '../../utils/helpers';
-// import '../../assets/css/headerstyle.css'
-
-
-
 
 const Header = () => {
   const location = useLocation();
@@ -21,8 +17,22 @@ const Header = () => {
   
   const [user, setUser] = useState({});
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
- 
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setDropdownOpen(false);
+  };
+
+  const handleDropdownItemClick = (category) => {
+    // Implement the logic to handle dropdown item click (e.g., navigate to the respective page)
+    console.log(`Selected category: ${category}`);
+    closeDropdown();
+  };
 
   const logoutHandler = async () => {
     try {
@@ -101,9 +111,36 @@ useEffect(() => {
                     </a>
                   </li>
                   <li className="menu-itemhome1">
+<<<<<<< Updated upstream
                     <a href="/notification" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
                       Notification
                     </a>
+=======
+                    <div className="dropdown" onClick={toggleDropdown}>
+                      <button
+                        className="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        style={{ color: '#F5E8C7', backgroundColor: 'transparent', border: 'none' }}
+                      >
+                        NOTIFICATION
+                      </button>
+                      <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
+                        <a className="dropdown-item" href="/userNotif" onClick={() => handleDropdownItemClick('Heat Index')}>
+                          Heat Index
+                        </a>
+                        <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Typhoon')}>
+                          Typhoon
+                        </a>
+                        <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Earthquake')}>
+                          Earthquake
+                        </a>
+                      </div>
+                    </div>
+>>>>>>> Stashed changes
                   </li>
                 </ul>
               </nav>

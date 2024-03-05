@@ -16,6 +16,7 @@ import Dashboard from './Components/Admin/Dashboard'
 import AdminEarthquake from './Components/Admin/Earthquake';
 import AdminWeather from './Components/Admin/Weather';
 import AdminHeatIndex from './Components/Admin/HeatIndex';
+import AdminHeatReport from './Components/Admin/HeatReport';
 import WeatherApp from './Components/Charts/WeatherApp';
 import Chart1 from './Components/Charts/Chart1';
 import Chart2 from './Components/Charts/Chart2';
@@ -68,6 +69,7 @@ function App() {
             <Route path="/admin/dashboard/adminWeather" element={ <ProtectedRoute isAdmin={true}> <AdminWeather /> </ProtectedRoute>}/>
             <Route path="/admin/dashboard/adminUser" element={ <ProtectedRoute isAdmin={true}> <AdminUsers /> </ProtectedRoute>}/>
             <Route path="/admin/dashboard/adminHeatIndex" element={ <ProtectedRoute isAdmin={true}> < AdminHeatIndex/> </ProtectedRoute> } />
+            <Route path="/admin/dashboard/adminHeatReport" element={ <ProtectedRoute isAdmin={true}> < AdminHeatReport /> </ProtectedRoute> } />
             <Route path="/admin/adminChart1" element={ <ProtectedRoute isAdmin={true}> <Chart1 /> </ProtectedRoute> }  />
             <Route path="/admin/adminChart2" element={ <ProtectedRoute isAdmin={true}> <Chart2 /> </ProtectedRoute> } />
             <Route path="/admin/adminChart3" element={ <ProtectedRoute isAdmin={true}> <Chart3 /> </ProtectedRoute> } />

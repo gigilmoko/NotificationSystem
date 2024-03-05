@@ -45,22 +45,18 @@ Heat Index
   style = {{ color: '#F5E8C7'}}
 >
   <i className="far fa-file-alt me-2" />
-  Pages
+  Notification
 </a>
 <div className="dropdown-menu bg-transparent border-0">
-  <a href="signin.html" className="dropdown-item" style = {{ color: '#F5E8C7'}}>
-    Sign In
+  <a href="/admin/dashboard/adminHeatReport" className="dropdown-item" style = {{ color: '#F5E8C7'}}>
+    Heat Index
   </a>
   <a href="signup.html" className="dropdown-item" style = {{ color: '#F5E8C7'}}>
-    Sign Up
+    Typhoon
   </a>
   <a href="404.html" className="dropdown-item" style = {{ color: '#F5E8C7'}}>
-    404 Error
+    Earthquake
   </a>
-  <a href="blank.html" className="dropdown-item" style = {{ color: '#F5E8C7'}}>
-    Blank Page
-  </a>
-  
 </div>
 </div>
 </div>
