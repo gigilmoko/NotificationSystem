@@ -41,12 +41,17 @@ const EarthquakeNewUI = () => {
         setCurrentSlide(prevState => (prevState === earthquakes.length - 1 ? 0 : prevState + 1));
     };
 
+    const handleViewDetails = () => {
+        // Your logic to handle viewing details goes here
+    };
+
     return (
         <div style={{ backgroundColor: "#001F3F" }}>
             <Header />
             <section className="vh-100" >
-                <div className="container py-5 h-100">
-                    <h1 style = {{textAlign: 'center', color: '#F5E8C7' }}>Latest Earthquake</h1>
+                <div className="container py-5 h-100"> 
+                
+                    <h1 style = {{textAlign: 'center', color: '#F5E8C7' }}>Latest Earthquake </h1>
                     <div className="row d-flex justify-content-center align-items-center h-100"   >
                     <p style={{ color: '#F5E8C7', marginTop: '-200px', marginLeft: '780px' }}>Page {currentSlide + 1} of {earthquakes.length} </p>
                         <div className="col-md-9 col-lg-7 col-xl-5">

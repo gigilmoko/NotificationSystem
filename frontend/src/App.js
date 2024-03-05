@@ -82,8 +82,8 @@ function App() {
             <Route path="/notification" element={ <ProtectedRoute isAdmin={false}> <UserHeatAlert /> </ProtectedRoute> } />
             {/* ----Home---- */}
             <Route path = "/" element = { <NewHome/> } /> 
-            <Route path ="/earthquake" element = {<EarthquakeSite/>} />
-            <Route path ="/earthquake2" element = {<EarthquakeSite2/>} />
+            <Route path ="/earthquakelist" element = {<EarthquakeSite/>} />
+            <Route path ="/earthquakeui" element = {<EarthquakeSite2/>} />
             {/* <Route path ="/weather" element = {<WeatherSite/>} /> */}
             <Route path ="/weather" element = {<WeatherUi/>} />
             <Route path = "/about" element = { <About/> } /> 
