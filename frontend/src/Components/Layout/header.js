@@ -121,17 +121,17 @@ useEffect(() => {
                         aria-expanded="false"
                         style={{ color: '#F5E8C7', backgroundColor: 'transparent', border: 'none' }}
                       >
-                        Notification
+                        NOTIFICATION
                       </button>
                       <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
-                        <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Heat Index')}>
+                        <a className="dropdown-item" href="/userNotif" onClick={() => handleDropdownItemClick('Heat Index')}>
                           Heat Index
                         </a>
                         <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Typhoon')}>
-                          TYPHOON
+                          Typhoon
                         </a>
                         <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Earthquake')}>
-                          EARTHQUAKE
+                          Earthquake
                         </a>
                       </div>
                     </div>
@@ -170,10 +170,10 @@ useEffect(() => {
                       </button>
                       <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
                         <a className="dropdown-item" href="/earthquakeui" onClick={() => handleDropdownItemClick('Heat Index')}>
-                          EARTHQUAKE LATEST
+                          Latest Earthquake
                         </a>
                         <a className="dropdown-item" href="earthquakelist" onClick={() => handleDropdownItemClick('Typhoon')}>
-                          EARTHQUAKE LIST
+                          Earthquake List
                         </a>
                         
                       </div>

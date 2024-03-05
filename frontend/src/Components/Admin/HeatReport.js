@@ -42,10 +42,11 @@ const AdminHeatReport = () => {
     }, []);
 
     const getHeatIndexById = (heatIndexId) => {
-        const foundHeatIndex = heatIndexes.find(
-            (heatIndex) => heatIndex._id === heatIndexId
-        );
-        return foundHeatIndex ? foundHeatIndex.heatIndex : '';
+        const heatIndex = heatIndexes.find
+            ? heatAlert.heatIndex && heatAlert.heatIndex.heatIndex
+            : null;
+
+        return heatIndex ? heatIndex.name : '';
     };
 
     const heatAlertList = () => {
@@ -80,17 +81,17 @@ const AdminHeatReport = () => {
             rows: [],
         };
 
-        heatAlert.forEach((heatAlert) => {
-            const dateObject = new Date(heatAlert.timestamp);
+        heatAlert.forEach((heatAlerts) => {
+            const dateObject = new Date(heatAlerts.timestamp);
             const dateString = dateObject.toLocaleDateString();
             const timeString = dateObject.toLocaleTimeString();
 
             data.rows.push({
                 date: dateString,
                 time: timeString,
-                heatIndex: getHeatIndexById(heatAlert.heatIndex),
-                warning: heatAlert.warning,
-                details: heatAlert.details,
+                heatIndex: getHeatIndexById(heatAlerts.heatIndex),
+                warning: heatAlerts.warning,
+                details: heatAlerts.details,
             });
         });
 

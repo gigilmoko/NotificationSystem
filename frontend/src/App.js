@@ -80,7 +80,7 @@ function App() {
 
             <Route path ="/adminEarthquakeChart" element = {<EarthquakeChart/>} />
             <Route path ="/userForecast" element = {<WeatherApp/>} />
-            {/* <Route path="/userNotif" element={<UserHeatAlert onNewAlert={(alert) => setNewAlert(alert)} />} /> */}
+            <Route path="/userNotif" element={<UserHeatAlert onNewAlert={(alert) => setNewAlert(alert)} />} />
             <Route path="/notification" element={ <ProtectedRoute isAdmin={false}> <UserHeatAlert /> </ProtectedRoute> } />
             {/* ----Home---- */}
             <Route path = "/" element = { <NewHome/> } /> 
