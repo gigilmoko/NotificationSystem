@@ -125,13 +125,13 @@ useEffect(() => {
                       </button>
                       <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
                         <a className="dropdown-item" href="/userNotif" onClick={() => handleDropdownItemClick('Heat Index')}>
-                          Heat Index
+                          HEAT INDEX
                         </a>
                         <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Typhoon')}>
-                          Typhoon
+                          TYPHOON
                         </a>
                         <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Earthquake')}>
-                          Earthquake
+                          EARTHQUAKE
                         </a>
                       </div>
                     </div>
@@ -170,10 +170,10 @@ useEffect(() => {
                       </button>
                       <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
                         <a className="dropdown-item" href="/earthquakeui" onClick={() => handleDropdownItemClick('Heat Index')}>
-                          Earthquake Latest
+                          EARTHQUAKE LATEST
                         </a>
                         <a className="dropdown-item" href="earthquakelist" onClick={() => handleDropdownItemClick('Typhoon')}>
-                          Earthquake List
+                          EARTHQUAKE LIST
                         </a>
                         
                       </div>
@@ -181,7 +181,7 @@ useEffect(() => {
                   </li>
                     <li>
                       <a href="/weather" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
-                        Weather
+                        WEATHER
                       </a>
                     </li>
                     <li>
