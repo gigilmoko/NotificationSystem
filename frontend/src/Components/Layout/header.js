@@ -110,7 +110,7 @@ useEffect(() => {
                       About
                     </a>
                   </li>
-                  <li className="menu-itemhome1">
+                  <li className="menu-itemhome1" style = {{marginTop: '-6px'}}>
                     <div className="dropdown" onClick={toggleDropdown}>
                       <button
                         className="btn btn-secondary dropdown-toggle"
@@ -128,10 +128,10 @@ useEffect(() => {
                           Heat Index
                         </a>
                         <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Typhoon')}>
-                          Typhoon
+                          TYPHOON
                         </a>
                         <a className="dropdown-item" href="#" onClick={() => handleDropdownItemClick('Earthquake')}>
-                          Earthquake
+                          EARTHQUAKE
                         </a>
                       </div>
                     </div>
@@ -155,14 +155,33 @@ useEffect(() => {
               <nav className="navbar justify-content-end">
                 <div className="user-items">
                   <ul className="list-unstyled content-light d-flex align-items-center m-0">
-                    <li>
-                      <a href="/earthquake" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
-                        Earthquake
-                      </a>
-                    </li>
+                  <li className="menu-itemhome1" style = {{marginTop: '-1px'}}>
+                    <div className="dropdown" onClick={toggleDropdown}>
+                      <button
+                        className="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        style={{ color: '#F5E8C7', backgroundColor: 'transparent', border: 'none' }}
+                      >
+                        EARTHQUAKE
+                      </button>
+                      <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
+                        <a className="dropdown-item" href="/earthquakeui" onClick={() => handleDropdownItemClick('Heat Index')}>
+                          EARTHQUAKE LATEST
+                        </a>
+                        <a className="dropdown-item" href="earthquakelist" onClick={() => handleDropdownItemClick('Typhoon')}>
+                          EARTHQUAKE LIST
+                        </a>
+                        
+                      </div>
+                    </div>
+                  </li>
                     <li>
                       <a href="/weather" className="text-uppercase item-anchor" style={{ color: '#F5E8C7' }}>
-                        Weather
+                        WEATHER
                       </a>
                     </li>
                     <li>
