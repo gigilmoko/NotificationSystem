@@ -72,12 +72,7 @@ const AdminEarthquake = () => {
                 </div>
                 </div>
 
-                    <div className="col-12 col-md-2">
-                        <div className="sidebar pe-4 pb-3">
-                            <Sidebar />
-                        </div>
-                    </div>
-
+                 
                     <div className="col-12 col-md-10">
                         <Fragment>
                             <br></br>

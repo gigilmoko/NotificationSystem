@@ -32,25 +32,26 @@ const AdminHeatIndex = () => {
         const data = {
             columns: [
                 {
-                    label: 'Date',
+                    label: <span style={{ color: '#F5E8C7' }}>Date</span>,
                     field: 'date',
                     sort: 'asc',
                 },
                 {
-                    label: 'Time',
+                    label: <span style={{ color: '#F5E8C7' }}>Time</span>,
                     field: 'time',
                     sort: 'asc',
                 },
                 {
-                    label: 'Heat Index',
+                    label: <span style={{ color: '#F5E8C7' }}>Heat Index</span>,
                     field: 'heatIndex',
                     sort: 'asc',
                 },
                 {
-                    label: 'Category',
+                    label: <span style={{ color: '#F5E8C7' }}>Category</span>,
                     field: 'category',
                     sort: 'asc',
                 },
+                
             ],
             rows: [],
         };
@@ -61,10 +62,10 @@ const AdminHeatIndex = () => {
             const timeString = dateObject.toLocaleTimeString();
     
             data.rows.push({
-                date: dateString,
-                time: timeString,
-                heatIndex: heatindex.heatIndex,
-                category: heatindex.category,
+                date: <span style={{ color: '#F5E8C7' }}>{dateString}</span>,
+                time: <span style={{ color: '#F5E8C7' }}>{timeString}</span>,
+                heatIndex: <span style={{ color: '#F5E8C7' }}>{heatindex.heatIndex}</span>,
+                category: <span style={{ color: '#F5E8C7' }}>{heatindex.category}</span>,
             });
         });
     
@@ -93,6 +94,7 @@ const AdminHeatIndex = () => {
                             bordered
                             striped
                             hover
+                            style={{ backgroundColor: '#323C50 ' }}
                         />
                     </Fragment>
                 </div>
