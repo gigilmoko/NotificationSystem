@@ -4,11 +4,11 @@ import axios from 'axios'
 import { getToken } from "../../utils/helpers";
 import { MDBDataTable } from 'mdbreact'
 
-const AdminEarthquake = () => { 
-    const [earthquakes, setEarthquakes] = useState([]);
+const AdminHeatIndex = () => { 
+    const [heatIndex, setHeatIndex] = useState([]);
     const [error, setError] = useState('');
 
-    const getEarthquakes = async () => {
+    const getHeatIndex = async () => {
         try {
             const config = {
                 headers: {
@@ -16,50 +16,61 @@ const AdminEarthquake = () => {
                     'Authorization': `Bearer ${getToken()}`
                 }
             };
-            const { data } = await axios.get(`${process.env.REACT_APP_API}/api/getEarthquakes`, config);
+            const { data } = await axios.get(`${process.env.REACT_APP_API}/api/getHeatIndex`, config);
             console.log(data);
-            setEarthquakes(data.earthquakes);
+            setHeatIndex(data.heatIndexes);
         } catch (error) {
             setError(error.response.data.message);
         }
     };
 
     useEffect(() => {
-        getEarthquakes();
+        getHeatIndex();
     }, []);
 
-    const earthquakesList = () => {
+    const heatIndexesList = () => {
         const data = {
             columns: [
                 {
-                    label: 'Magnitude',
-                    field: 'mag',
+                    label: 'Date',
+                    field: 'date',
                     sort: 'asc',
                 },
                 {
-                    label: 'Place',
-                    field: 'place',
+                    label: 'Time',
+                    field: 'time',
                     sort: 'asc',
                 },
                 {
-                    label: 'Location',
-                    field: 'coordinates',
+                    label: 'Heat Index',
+                    field: 'heatIndex',
                     sort: 'asc',
-                }
+                },
+                {
+                    label: 'Category',
+                    field: 'category',
+                    sort: 'asc',
+                },
             ],
-            rows: []
-        }
+            rows: [],
+        };
     
-        earthquakes.forEach(earthquake => {
+        heatIndex.forEach((heatindex) => {
+            const dateObject = new Date(heatindex.timestamp);
+            const dateString = dateObject.toLocaleDateString();
+            const timeString = dateObject.toLocaleTimeString();
+    
             data.rows.push({
-                mag: earthquake.mag,
-                place: earthquake.place,
-                coordinates: `${earthquake.coordinates.coordinates[0]}, ${earthquake.coordinates.coordinates[1]}`, 
+                date: dateString,
+                time: timeString,
+                heatIndex: heatindex.heatIndex,
+                category: heatindex.category,
             });
         });
     
         return data;
     };
+    
 
     return (
         <Fragment>
@@ -75,9 +86,9 @@ const AdminEarthquake = () => {
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <br></br>
-                        <h1 className="my-6" style = {{color: '#F5E8C7'}}>All Earthquakes</h1>
+                        <h1 className="my-6" style = {{color: '#F5E8C7'}}>Heat Index Data</h1>
                         <MDBDataTable
-                            data={earthquakesList()}
+                            data={heatIndexesList()}
                             className="px-3"
                             bordered
                             striped
@@ -91,4 +102,4 @@ const AdminEarthquake = () => {
     )
 }
 
-export default AdminEarthquake;
+export default AdminHeatIndex;

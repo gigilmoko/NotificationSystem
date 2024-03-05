@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const heatIndexSchema = new mongoose.Schema({
@@ -18,4 +17,4 @@ const heatIndexSchema = new mongoose.Schema({
 
 const HeatIndex = mongoose.model('HeatIndex', heatIndexSchema);
 
-module.exports = { HeatIndex };
+module.exports = HeatIndex;

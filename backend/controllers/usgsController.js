@@ -1,4 +1,3 @@
-
 const axios = require('axios');
 const UsgsData = require('../models/UsgsData')
 const cron = require('node-cron');

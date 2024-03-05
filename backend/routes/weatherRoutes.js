@@ -1,5 +1,5 @@
 const express = require('express');
-const {  searchWeatherData, getWeather, getWeeklyAverageHeatIndex, getHourlyAverageHeatIndex, saveHeatIndex} = require('../controllers/weatherController');
+const {  searchWeatherData, getWeather, getWeeklyAverageHeatIndex, getHourlyAverageHeatIndex, saveHeatIndex, getHeatIndex} = require('../controllers/weatherController');
 const router = express.Router();
 
 router.get('/searchWeatherData/:cityName', async (req, res) => {
@@ -16,6 +16,7 @@ router.get('/getWeather', getWeather);
 router.get('/getWeeklyAverageHeatIndex', getWeeklyAverageHeatIndex);
 router.get('/getHourlyAverageHeatIndex', getHourlyAverageHeatIndex);
 router.post('/saveHeatIndex', saveHeatIndex);
+router.get('/getHeatIndex', getHeatIndex);
 
 
 module.exports = router;

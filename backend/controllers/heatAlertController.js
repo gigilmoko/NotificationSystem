@@ -71,4 +71,6 @@ const getAllHeatAlerts = async (req, res, next) => {
 };
 
 
+
+
 module.exports = { createHeatAlert, getAllHeatAlerts };

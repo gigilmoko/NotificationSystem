@@ -36,8 +36,6 @@ const AdminWeather = () => {
                     label: 'Date',
                     field: 'date',
                     sort: 'asc',
-                    
-                    
                 },
                 {
                     label: 'Time',

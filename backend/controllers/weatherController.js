@@ -1,6 +1,6 @@
 const axios = require('axios');
 const WeatherData = require('../models/weather');
-const HeatIndex = require('../models/heat').HeatIndex;
+const HeatIndex = require('../models/heat');
 const cron = require('node-cron');
 const { createHeatAlert } = require('../controllers/heatAlertController');
 
@@ -173,6 +173,29 @@ const saveHeatIndex = async (weatherCityName, weatherApiKey, io) => {
     }
 };
 
+const getHeatIndex = async (req, res, next) => {
+    try {
+        const heatIndexes = await HeatIndex.find();
+        if (!heatIndexes || heatIndexes.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Heat index not found'
+            });
+        }
+        res.status(200).json({
+            success: true,
+            heatIndexes
+        });
+    } catch (error) {
+        console.error('Error fetching Heat Index data:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal server error'
+        });
+    }
+};
+
+
 const startCronJobsWeather = (io) => {
     cron.schedule('0 * * * *', async () => {
         const weatherCityName = 'Taguig';
@@ -333,6 +356,7 @@ module.exports = {
     startCronJobsWeather, 
     getWeather, 
     saveHeatIndex, 
+    getHeatIndex,
     checkHeatIndexCategory, 
     getWeeklyAverageHeatIndex,
     getHourlyAverageHeatIndex 

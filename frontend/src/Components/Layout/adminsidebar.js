@@ -14,7 +14,7 @@ const AdminSidebar = () => {
     style={{ width: '120px', height: '120px', marginLeft: '50px', marginTop: '-70px' }}
   />
 </a>
-<div className="navbar-nav w-100" style = {{marginTop: '-200px'}}>
+<div className="navbar-nav w-100" style = {{marginTop: '-20  0px'}}>
     
 <a href="/admin/dashboard" className="nav-item nav-link active" style = {{ color: '#F5E8C7'}}>
 <i className="fa fa-tachometer-alt me-2" />
@@ -33,9 +33,9 @@ Weather
 <i className="fa fa-table me-2" />
 Users
 </a>
-<a href="chart.html" className="nav-item nav-link" style = {{ color: '#F5E8C7'}}>
+<a href="/admin/dashboard/adminHeatIndex" className="nav-item nav-link" style = {{ color: '#F5E8C7'}}>
 <i className="fa fa-chart-bar me-2" />
-Charts
+Heat Index
 </a>
 <div className="nav-item dropdown" style = {{ color: '#F5E8C7'}}>
 <a

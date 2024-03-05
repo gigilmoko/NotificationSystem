@@ -20,9 +20,6 @@ const HeatAlertNotification = ({ heatAlert }) => {
             <p className="text-sm">{heatAlert?.warning} - {heatAlert?.details}</p>
             </div>
             <button onClick={() => setShowNotification(false)} className="focus:outline-none">
-            {/* You can add your own close icon or text here */}
-            {/* For example, a simple 'X' character */}
-            X
             </button>
         </div>
         </div>
