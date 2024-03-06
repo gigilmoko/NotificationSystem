@@ -5,7 +5,7 @@ import '../../assets/css/style.css'
 
 const footer = () => {
   return (
-    <div ><footer id="footer" className="overflow-hidden">
+    <div ><footer id="footer" className="overflow-hidden" style = {{height: '330px'}}>
     <div className="container mt-5">
       <div className="row">
         <div className="footer-top-area">
@@ -100,11 +100,11 @@ const footer = () => {
                 <h5 className="widget-title" style = {{color: '#F5E8C7'}}>Contact Us</h5>
                 <p style = {{color: '#F5E8C7'}}>
                   Do you have any queries or suggestions?{" "}
-                  <a href="mailto:" style = {{color: '#F5E8C7'}}>yourinfo@gmail.com</a>
+                  <a href="mailto:" style = {{color: '#F5E8C7'}}>notificaution@gmail.com</a>
                 </p>
                 <p style = {{color: '#F5E8C7'}}>
                   If you need support? Just give us a call.{" "}
-                  <a href="" style = {{color: '#F5E8C7'}}>+55 111 222 333 44</a>
+                  <a href="" style = {{color: '#F5E8C7'}}>+639993427665</a>
                 </p>
               </div>
             </div>

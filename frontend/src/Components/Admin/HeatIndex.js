@@ -5,6 +5,7 @@ import { getToken } from "../../utils/helpers";
 import { MDBDataTable } from 'mdbreact'
 
 const AdminHeatIndex = () => { 
+   
     const [heatIndex, setHeatIndex] = useState([]);
     const [error, setError] = useState('');
 

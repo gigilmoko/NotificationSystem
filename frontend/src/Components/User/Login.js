@@ -11,7 +11,14 @@ import '../../assets/css/flaticon.css';
 import '../../assets/css/themify-icons.css';
 
 export default function Login() {
-   
+    const [isFocused, setIsFocused] = useState(false);
+    const handleFocus = () => {
+      setIsFocused(true);
+    };
+  
+    const handleBlur = () => {
+      setIsFocused(false);
+    };
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     // const [loading, setLoading] = useState(false)
@@ -97,7 +104,16 @@ export default function Login() {
                                                     className="form-control"
                                                     value={email}
                                                     placeholder = "Username"
-                                                    onChange={(e) => setEmail(e.target.value)}/>
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    style={{
+                                                
+                                                        color: isFocused ? 'black' : '#F5E8C7',
+                                                      }}
+                                                    onFocus={handleFocus}
+                                                    onBlur={handleBlur}
+                                                    />
+
+                                                
                                             </div>
                                             <div className="form-group">
                                                 <h1 className="mb-3" style={{ fontSize: '2em', marginTop: '15px' }}>Password</h1>
@@ -108,12 +124,18 @@ export default function Login() {
                                                 placeholder="Password"
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
+                                                style={{
+                                                
+                                                    color: isFocused ? 'black' : '#F5E8C7',
+                                                  }}
+                                                onFocus={handleFocus}
+                                                onBlur={handleBlur}
                                             />
                                                
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <button id="login_button" type="submit" className="btn_3">log in</button>
-                                                <Link to="/password/forgot"><a class="lost_pass" href="#">forget password?</a></Link>
+                                                <Link to="/password/forgot"><a class="lost_pass" href="#" style = {{color: '#F5E8C7'}}>forget password?</a></Link>
                                             </div>
                                         </form>
                                     </div>

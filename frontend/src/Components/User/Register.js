@@ -8,6 +8,15 @@ import '../../assets/css/flaticon.css';
 import '../../assets/css/themify-icons.css';
 
 export default function Register() {
+
+  const [isFocused, setIsFocused] = useState(false);
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -78,10 +87,10 @@ export default function Register() {
       <div className="custom-container-user">
         <Header />
         <div className="row wrapper">
-          <div className="col-10 col-lg-5 mx-auto" style={{ backgroundColor: '#323C50', marginTop: '50px' }}>
-            <form className="shadow-lg" onSubmit={handleSubmit}>
+          <div className="col-10 col-lg-5 mx-auto" style={{ backgroundColor: '#323C50', marginTop: '50px', height: '670px', width: '580px' }}>
+            <form className="shadow-lg" onSubmit={handleSubmit} >
               <div className="text-center">
-                <h1 className="mb-3" style={{ fontSize: '4em', marginTop: '10px' }}>
+                <h1 className="mb-3" style={{ fontSize: '2.5em', marginTop: '10px' }}>
                   Register
                 </h1>
                 <div className="avatar-container">
@@ -90,7 +99,7 @@ export default function Register() {
                       className="rounded-circle"
                       src={avatarPreview}
                       alt={`Avatar Preview`}
-                      style={{ width: '200px', height: '200px' }}
+                      style={{ width: '120px', height: '120px' }}
                     />
                   ) : (
                     <p>No avatars to display</p>
@@ -98,7 +107,7 @@ export default function Register() {
                 </div>
               </div>
               <div className="form-group">
-                <h1 className="mb-3" style={{ fontSize: '2em', marginTop: '10px' }}>
+                <h1 className="mb-3" style={{ fontSize: '1.5em', marginTop: '5px' }}>
                   Name
                 </h1>
                 <input
@@ -109,10 +118,19 @@ export default function Register() {
                   onChange={handleChange}
                   value={formData.name}
                   placeholder="Insert Name Here"
+                  style={{
+                    width: '500px',
+                    height: '40px',
+                    margin: '0 auto',
+                    display: 'block',
+                    color: isFocused ? 'black' : '#F5E8C7',
+                  }}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 />
               </div>
               <div className="form-group">
-                <h1 className="mb-3" style={{ fontSize: '2em', marginTop: '10px' }}>
+                <h1 className="mb-3" style={{ fontSize: '1.5em', marginTop: '5px' }}>
                   Email
                 </h1>
                 <input
@@ -123,10 +141,19 @@ export default function Register() {
                   onChange={handleChange}
                   value={formData.email}
                   placeholder="Insert Email Here"
+                  style={{
+                    width: '500px',
+                    height: '40px',
+                    margin: '0 auto',
+                    display: 'block',
+                    color: isFocused ? 'black' : '#F5E8C7',
+                  }}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 />
               </div>
               <div className="form-group">
-                <h1 className="mb-3" style={{ fontSize: '2em', marginTop: '10px' }}>
+                <h1 className="mb-3" style={{ fontSize: '1.5em', marginTop: '5px' }}>
                   Password
                 </h1>
                 <input
@@ -137,10 +164,19 @@ export default function Register() {
                   onChange={handleChange}
                   value={formData.password}
                   placeholder="Insert Password Here"
+                  style={{
+                    width: '500px',
+                    height: '40px',
+                    margin: '0 auto',
+                    display: 'block',
+                    color: isFocused ? 'black' : '#F5E8C7',
+                  }}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 />
               </div>
               <div className="form-group">
-                <h1 className="mb-3" style={{ fontSize: '2em', marginTop: '10px' }}>
+                <h1 className="mb-3" style={{ fontSize: '1.5em', marginTop: '5px' }}>
                   Avatar
                 </h1>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -151,12 +187,12 @@ export default function Register() {
                     accept="image/*"
                     className="form-control-file"
                     onChange={handleFileChange}
+                    style= {{ width: '500px', color: '#F5E8C7', marginTop: '-10px'}}
                   />
                 </div>
               </div>
-              <br/>
-              <br/>
-              <button type="submit" className="btn btn-primary" style={{ display: 'block', margin: 'auto', width: '200px', height: '50px', fontSize: '1.5em', backgroundColor: '#ECB159', color: '#F5E8C7' }}>Register</button>
+              
+              <button type="submit" className="btn btn-primary" style={{ display: 'block', margin: 'auto', width: '200px', height: '50px', fontSize: '1.5em', backgroundColor: '#ECB159', color: '#F5E8C7', marginTop: '10px' }}>Register</button>
               <br/>
               <br/>
             </form>

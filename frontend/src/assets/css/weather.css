@@ -47,7 +47,7 @@
 
 /* CSS */
 .button-62 {
-  background: linear-gradient(to bottom right, #ffb99a, #ffdbc5);
+  background: transparent; /* Change the background to transparent */
   border: 0;
   border-radius: 12px;
   color: #FFFFFF;
